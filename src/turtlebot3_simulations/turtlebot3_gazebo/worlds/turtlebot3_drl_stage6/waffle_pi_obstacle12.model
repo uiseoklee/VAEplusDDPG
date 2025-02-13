@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <scene>
+      <shadows>false</shadows>
+    </scene>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.319654 -0.235002 9.29441 0 1.5138 0.009599</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+    <physics type="ode">
+      <real_time_update_rate>1000000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>150</iters>
+          <precon_iters>0</precon_iters>
+          <sor>1.400000</sor>
+          <use_dynamic_moi_rescaling>1</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0.00001</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>2000.000000</contact_max_correcting_vel>
+          <contact_surface_layer>0.01000</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <model name="turtlebot3_drl_world">
+      <static>1</static>
+      <include>
+        <uri>model://turtlebot3_drl_stage6</uri>
+      </include>
+    </model>
+    
+    <model name="table1">
+      <static>1</static>
+      <include>
+        <pose>2.274 1.262 0 0 0 -1</pose>
+        <uri>file://table</uri>
+      </include>
+    </model>
+    
+    <model name="table2">
+      <static>1</static>
+      <include>
+        <pose>-1.88 -1.78 0 0 0 0.75</pose>
+        <uri>file://table</uri>
+      </include>
+    </model>
+
+    <model name="table3">
+      <static>1</static>
+      <include>
+        <pose>-1.7 1.7 0 0 0 0.75</pose>
+        <uri>file://table</uri>
+      </include>
+    </model>
+    
+    <model name="table4">
+      <static>1</static>
+      <include>
+        <pose>1.0 -2.0 0 0 0 0</pose>
+        <uri>file://table</uri>
+      </include>
+    </model>
+    
+    <model name="turtlebot3_drl_obstacle1">
+      <plugin name="obstacle1" filename="libobstacle1.so"/>
+      <include>
+        <pose>3 3 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle1</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle2">
+      <plugin name="obstacle2" filename="libobstacle2.so"/>
+      <include>
+        <pose>-3 -3 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle2</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle3">
+      <plugin name="obstacle3" filename="libobstacle3.so"/>
+      <include>
+        <pose>3 -3 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle3</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle4">
+      <plugin name="obstacle4" filename="libobstacle4.so"/>
+      <include>
+        <pose>-3 3 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle4</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle5">
+      <plugin name="obstacle5" filename="libobstacle5.so"/>
+      <include>
+        <pose>-3 0 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle5</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle6">
+      <plugin name="obstacle6" filename="libobstacle6.so"/>
+      <include>
+        <pose>3 0 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle6</uri>
+      </include>
+    </model>
+    
+    <model name="turtlebot3_drl_obstacle7">
+      <plugin name="obstacle7" filename="libobstacle7.so"/>
+      <include>
+        <pose>1.5 1.5 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle7</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle8">
+      <plugin name="obstacle8" filename="libobstacle8.so"/>
+      <include>
+        <pose>-1.5 -1.5 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle8</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle9">
+      <plugin name="obstacle9" filename="libobstacle9.so"/>
+      <include>
+        <pose>1.5 -1.5 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle9</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle10">
+      <plugin name="obstacle10" filename="libobstacle10.so"/>
+      <include>
+        <pose>-1.5 1.5 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle10</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle11">
+      <plugin name="obstacle11" filename="libobstacle11.so"/>
+      <include>
+        <pose>-1.5 0 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle11</uri>
+      </include>
+    </model>
+
+    <model name="turtlebot3_drl_obstacle12">
+      <plugin name="obstacle12" filename="libobstacle12.so"/>
+      <include>
+        <pose>1.5 0 0 0 0 0</pose>
+        <uri>model://turtlebot3_drl_world/obstacle12</uri>
+      </include>
+    </model>    
+
+    <include>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://turtlebot3_waffle_pi</uri>
+    </include>
+
+  </world>
+</sdf>

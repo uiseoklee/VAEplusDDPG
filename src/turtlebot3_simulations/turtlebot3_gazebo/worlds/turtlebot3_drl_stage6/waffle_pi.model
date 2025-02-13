@@ -5,11 +5,28 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-
+    
+    <!--
     <include>
       <uri>model://sun</uri>
     </include>
+    -->
 
+    <!-- 조명 설정 추가 -->
+    <light name="sun" type="directional">
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>1.0 1.0 1.0 1</diffuse> <!-- 더 어두운 조명 -->
+      <specular>1.0 1.0 1.0 1</specular> <!-- 더 어두운 조명 -->
+      <attenuation>
+        <range>1000</range>
+        <constant>1.0</constant> <!-- 더 높은 값 -->
+        <linear>1.0</linear> <!-- 더 높은 값 -->
+        <quadratic>1.0</quadratic> <!-- 더 높은 값 -->
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    
     <scene>
       <shadows>false</shadows>
     </scene>
@@ -46,10 +63,74 @@
     <model name="turtlebot3_drl_world">
       <static>1</static>
       <include>
-        <uri>model://turtlebot3_drl_world</uri>
+        <uri>model://turtlebot3_drl_stage6</uri>
+      </include>
+    </model>
+    
+    <model name="table1">
+      <static>1</static>
+      <include>
+        <pose>1.7 1.7 0 0 0 -0.75</pose>
+        <uri>file://models/table</uri>
+      </include>
+    </model>
+    
+    <model name="table2">
+      <static>1</static>
+      <include>
+        <pose>-1.7 -1.7 0 0 0 2.5</pose>
+        <uri>file://models/table</uri>
       </include>
     </model>
 
+    <model name="table3">
+      <static>1</static>
+      <include>
+        <pose>-1.7 1.7 0 0 0 0.75</pose>
+        <uri>file://models/table</uri>
+      </include>
+    </model>
+    
+    <model name="table4">
+      <static>1</static>
+      <include>
+        <pose>1.7 -1.7 0 0 0 -2.5</pose>
+        <uri>file://models/table</uri>
+      </include>
+    </model>
+    
+    <model name="aws_robomaker_residential_ReadingDesk_01">
+      <static>1</static>
+      <include>
+        <pose>2.7 2.85 0 0 0 1.57</pose>
+        <uri>file://models/aws_robomaker_residential_ReadingDesk_01</uri>
+      </include>
+    </model>
+    
+    <model name="aws_robomaker_residential_ReadingDesk_02">
+      <static>1</static>
+      <include>
+        <pose>2.7 -2.85 0 0 0 1.57</pose>
+        <uri>file://models/aws_robomaker_residential_ReadingDesk_01</uri>
+      </include>
+    </model>
+    
+    <model name="aws_robomaker_residential_ReadingDesk_03">
+      <static>1</static>
+      <include>
+        <pose>-2.7 2.85 0 0 0 1.57</pose>
+        <uri>file://models/aws_robomaker_residential_ReadingDesk_01</uri>
+      </include>
+    </model>
+    
+    <model name="aws_robomaker_residential_ReadingDesk_04">
+      <static>1</static>
+      <include>
+        <pose>-2.7 -2.85 0 0 0 1.57</pose>
+        <uri>file://models/aws_robomaker_residential_ReadingDesk_01</uri>
+      </include>
+    </model>  
+    
     <model name="turtlebot3_drl_obstacle1">
       <plugin name="obstacle1" filename="libobstacle1.so"/>
       <include>
@@ -66,37 +147,7 @@
       </include>
     </model>
 
-    <model name="turtlebot3_drl_obstacle3">
-      <plugin name="obstacle3" filename="libobstacle3.so"/>
-      <include>
-        <pose>2 -2 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle3</uri>
-      </include>
-    </model>
 
-    <model name="turtlebot3_drl_obstacle4">
-      <plugin name="obstacle4" filename="libobstacle4.so"/>
-      <include>
-        <pose>-2 2 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle4</uri>
-      </include>
-    </model>
-
-    <model name="turtlebot3_drl_obstacle5">
-      <plugin name="obstacle5" filename="libobstacle5.so"/>
-      <include>
-        <pose>-2 0 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle5</uri>
-      </include>
-    </model>
-
-    <model name="turtlebot3_drl_obstacle6">
-      <plugin name="obstacle6" filename="libobstacle6.so"/>
-      <include>
-        <pose>2 0 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle6</uri>
-      </include>
-    </model>
 
     <include>
       <pose>0 0 0 0 0 0</pose>
