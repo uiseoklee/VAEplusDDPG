@@ -1,1 +1,0 @@
-/home/dmsgv1/VAEplusDDPG/src/turtlebot3_msgs/msg/Sound.msg
