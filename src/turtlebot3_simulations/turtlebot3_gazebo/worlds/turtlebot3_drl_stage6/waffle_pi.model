@@ -131,21 +131,7 @@
       </include>
     </model>  
     
-    <model name="turtlebot3_drl_obstacle1">
-      <plugin name="obstacle1" filename="libobstacle1.so"/>
-      <include>
-        <pose>2 2 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle1</uri>
-      </include>
-    </model>
 
-    <model name="turtlebot3_drl_obstacle2">
-      <plugin name="obstacle2" filename="libobstacle2.so"/>
-      <include>
-        <pose>-2 -2 0 0 0 0</pose>
-        <uri>model://turtlebot3_drl_world/obstacle2</uri>
-      </include>
-    </model>
 
 
 

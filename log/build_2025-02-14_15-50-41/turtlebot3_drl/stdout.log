@@ -1,0 +1,20 @@
+running develop
+running egg_info
+writing turtlebot3_drl.egg-info/PKG-INFO
+writing dependency_links to turtlebot3_drl.egg-info/dependency_links.txt
+writing entry points to turtlebot3_drl.egg-info/entry_points.txt
+writing requirements to turtlebot3_drl.egg-info/requires.txt
+writing top-level names to turtlebot3_drl.egg-info/top_level.txt
+reading manifest file 'turtlebot3_drl.egg-info/SOURCES.txt'
+writing manifest file 'turtlebot3_drl.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/python3.8/site-packages/turtlebot3-drl.egg-link (link to .)
+Installing environment script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+Installing gazebo_goals script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+Installing real_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+Installing real_environment script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+Installing test_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+Installing train_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+
+Installed /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl
+running symlink_data

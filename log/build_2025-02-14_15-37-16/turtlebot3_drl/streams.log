@@ -1,0 +1,31 @@
+[0.288s] Invoking command in '/home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl': PYTHONPATH=/home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/build --no-deps symlink_data
+[0.382s] running develop
+[0.433s] running egg_info
+[0.433s] creating turtlebot3_drl.egg-info
+[0.433s] writing turtlebot3_drl.egg-info/PKG-INFO
+[0.433s] writing dependency_links to turtlebot3_drl.egg-info/dependency_links.txt
+[0.433s] writing entry points to turtlebot3_drl.egg-info/entry_points.txt
+[0.434s] writing requirements to turtlebot3_drl.egg-info/requires.txt
+[0.434s] writing top-level names to turtlebot3_drl.egg-info/top_level.txt
+[0.436s] writing manifest file 'turtlebot3_drl.egg-info/SOURCES.txt'
+[0.436s] reading manifest file 'turtlebot3_drl.egg-info/SOURCES.txt'
+[0.436s] writing manifest file 'turtlebot3_drl.egg-info/SOURCES.txt'
+[0.449s] running build_ext
+[0.462s] Creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/python3.8/site-packages/site.py
+[0.463s] Creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/python3.8/site-packages/turtlebot3-drl.egg-link (link to .)
+[0.463s] Installing environment script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] Installing gazebo_goals script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] Installing real_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] Installing real_environment script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] Installing test_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] Installing train_agent script to /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/turtlebot3_drl
+[0.463s] 
+[0.463s] Installed /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl
+[0.463s] running symlink_data
+[0.463s] creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/ament_index
+[0.463s] creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/ament_index/resource_index
+[0.463s] creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/ament_index/resource_index/packages
+[0.464s] symbolically linking /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/resource/turtlebot3_drl -> /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/ament_index/resource_index/packages
+[0.464s] symbolically linking /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/package.xml -> /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/turtlebot3_drl
+[0.464s] creating /home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/share/turtlebot3_drl/launch
+[0.475s] Invoked command in '/home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl' returned '0': PYTHONPATH=/home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/dmsgv1/VAEplusDDPG/build/turtlebot3_drl/build --no-deps symlink_data

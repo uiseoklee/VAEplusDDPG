@@ -1,0 +1,8 @@
+[console_scripts]
+environment = turtlebot3_drl.drl_environment.drl_environment:main
+gazebo_goals = turtlebot3_drl.drl_gazebo.drl_gazebo:main
+real_agent = turtlebot3_drl.drl_agent.drl_agent:main_real
+real_environment = turtlebot3_drl.drl_environment.drl_environment_real:main
+test_agent = turtlebot3_drl.drl_agent.drl_agent:main_test
+train_agent = turtlebot3_drl.drl_agent.drl_agent:main_train
+

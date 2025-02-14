@@ -1,0 +1,15 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from turtlebot3_msgs/srv/Goal.srv
+// generated code does not contain a copyright notice
+
+
+module turtlebot3_msgs {
+  module srv {
+    struct Goal_Request {
+      boolean empty;
+    };
+    struct Goal_Response {
+      boolean new_goal;
+    };
+  };
+};

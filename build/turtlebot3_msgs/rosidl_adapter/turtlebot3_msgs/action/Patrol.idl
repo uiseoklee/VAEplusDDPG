@@ -1,0 +1,24 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from turtlebot3_msgs/action/Patrol.action
+// generated code does not contain a copyright notice
+
+
+module turtlebot3_msgs {
+  module action {
+    @verbatim (language="comment", text=
+      " Goal")
+    struct Patrol_Goal {
+      float radius;
+    };
+    struct Patrol_Result {
+      @verbatim (language="comment", text=
+        " Result")
+      boolean success;
+    };
+    struct Patrol_Feedback {
+      @verbatim (language="comment", text=
+        " Feedback")
+      float left_time;
+    };
+  };
+};
