@@ -1,3 +1,4 @@
+```bash
 # Terminal 1
 git clone git@github.com:uiseoklee/VAEplusDDPG.git
 cd VAEplusDDPG
