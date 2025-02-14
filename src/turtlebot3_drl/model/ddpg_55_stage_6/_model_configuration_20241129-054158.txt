@@ -1,0 +1,1875 @@
+device = cuda
+simulation_speed = 1
+state_size = 364
+action_size = 2
+hidden_size = 512
+input_size = 364
+batch_size = 64
+buffer_size = 1000000
+discount_factor = 0.99
+learning_rate = 0.003
+tau = 0.003
+step_time = 0.01
+loss_function = <function smooth_l1_loss at 0x7fbec1a6e9d0>
+epsilon = 1.0
+epsilon_decay = 0.9995
+epsilon_minimum = 0.05
+reward_function = A
+backward_enabled = False
+stacking_enabled = False
+stack_depth = 3
+frame_skip = 4
+networks = [Actor(
+  (vae1): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (vae2): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (fc1): Linear(in_features=260, out_features=512, bias=True)
+  (ln1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+  (fc2): Linear(in_features=512, out_features=256, bias=True)
+  (ln2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc3): Linear(in_features=256, out_features=2, bias=True)
+  (dropout): Dropout(p=0.1, inplace=False)
+), Actor(
+  (vae1): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (vae2): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (fc1): Linear(in_features=260, out_features=512, bias=True)
+  (ln1): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+  (fc2): Linear(in_features=512, out_features=256, bias=True)
+  (ln2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc3): Linear(in_features=256, out_features=2, bias=True)
+  (dropout): Dropout(p=0.1, inplace=False)
+), Critic(
+  (vae1): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (vae2): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (fc1): Linear(in_features=260, out_features=256, bias=True)
+  (ln1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc2): Linear(in_features=2, out_features=256, bias=True)
+  (ln2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc3): Linear(in_features=512, out_features=512, bias=True)
+  (ln3): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+  (fc4): Linear(in_features=512, out_features=1, bias=True)
+  (dropout): Dropout(p=0.2, inplace=False)
+), Critic(
+  (vae1): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (vae2): Conv2dVAE(
+    (encoder_blocks): ModuleList(
+      (0): EnhancedResidualBlock(
+        (conv1): Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(1, 32, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedResidualBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedResidualBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (fpn_encoder): ModuleList(
+      (0): EnhancedLightFPNBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Identity()
+      )
+      (1): EnhancedLightFPNBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): EnhancedLightFPNBlock(
+        (conv1): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (up_conv): Identity()
+        (downsample): Conv2d(32, 128, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (adaptive_pool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (flatten): Flatten(start_dim=1, end_dim=-1)
+    (fc_mu): Linear(in_features=128, out_features=128, bias=True)
+    (fc_logvar): Linear(in_features=128, out_features=128, bias=True)
+    (decoder_input): Linear(in_features=128, out_features=25600, bias=True)
+    (decoder_blocks): ModuleList(
+      (0): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(128, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(16, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+        )
+      )
+      (1): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(128, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(64, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(8, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(128, 64, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+        )
+      )
+      (2): EnhancedConvTranspose2dBlock(
+        (conv1): ConvTranspose2d(64, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), output_padding=(1, 1))
+        (gn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (conv2): ConvTranspose2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+        (cbam): CBAM(
+          (avg_pool): AdaptiveAvgPool2d(output_size=1)
+          (max_pool): AdaptiveMaxPool2d(output_size=1)
+          (fc): Sequential(
+            (0): Conv2d(32, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): ReLU()
+            (2): Conv2d(4, 32, kernel_size=(1, 1), stride=(1, 1))
+          )
+          (conv): Sequential(
+            (0): Conv2d(2, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3))
+            (1): Sigmoid()
+          )
+        )
+        (dropout): Dropout2d(p=0.1, inplace=False)
+        (upsample): Sequential(
+          (0): ConvTranspose2d(64, 32, kernel_size=(1, 1), stride=(2, 2), output_padding=(1, 1))
+          (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+        )
+      )
+    )
+    (final_layer): Sequential(
+      (0): Conv2d(32, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Sigmoid()
+    )
+  )
+  (fc1): Linear(in_features=260, out_features=256, bias=True)
+  (ln1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc2): Linear(in_features=2, out_features=256, bias=True)
+  (ln2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (fc3): Linear(in_features=512, out_features=512, bias=True)
+  (ln3): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+  (fc4): Linear(in_features=512, out_features=1, bias=True)
+  (dropout): Dropout(p=0.2, inplace=False)
+)]
+iteration = 0
+noise = <turtlebot3_drl.common.ounoise.OUNoise object at 0x7fbe9f1899d0>
+actor_optimizer = AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.003
+    maximize: False
+    weight_decay: 0.01
+)
+critic_optimizer = AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.003
+    maximize: False
+    weight_decay: 0.01
+)
+
