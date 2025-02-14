@@ -1,1 +1,0 @@
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_generator_c/turtlebot3_msgs/srv/detail/goal__type_support.h

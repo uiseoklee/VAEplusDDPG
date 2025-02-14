@@ -1,0 +1,69 @@
+device = cuda
+simulation_speed = 1
+state_size = 364
+action_size = 2
+hidden_size = 512
+input_size = 364
+batch_size = 64
+buffer_size = 1000000
+discount_factor = 0.99
+learning_rate = 0.003
+tau = 0.003
+step_time = 0.01
+loss_function = <function smooth_l1_loss at 0x7f55be524940>
+epsilon = 1.0
+epsilon_decay = 0.9995
+epsilon_minimum = 0.05
+reward_function = A
+backward_enabled = False
+stacking_enabled = False
+stack_depth = 3
+frame_skip = 4
+networks = [Actor(
+  (fa1): Linear(in_features=364, out_features=512, bias=True)
+  (fa2): Linear(in_features=512, out_features=512, bias=True)
+  (fa3): Linear(in_features=512, out_features=2, bias=True)
+), Actor(
+  (fa1): Linear(in_features=364, out_features=512, bias=True)
+  (fa2): Linear(in_features=512, out_features=512, bias=True)
+  (fa3): Linear(in_features=512, out_features=2, bias=True)
+), Critic(
+  (l1): Linear(in_features=364, out_features=256, bias=True)
+  (l2): Linear(in_features=2, out_features=256, bias=True)
+  (l3): Linear(in_features=512, out_features=512, bias=True)
+  (l4): Linear(in_features=512, out_features=1, bias=True)
+), Critic(
+  (l1): Linear(in_features=364, out_features=256, bias=True)
+  (l2): Linear(in_features=2, out_features=256, bias=True)
+  (l3): Linear(in_features=512, out_features=512, bias=True)
+  (l4): Linear(in_features=512, out_features=1, bias=True)
+)]
+iteration = 0
+noise = <turtlebot3_drl.common.ounoise.OUNoise object at 0x7f55a9c9c790>
+actor_optimizer = AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.003
+    maximize: False
+    weight_decay: 0.01
+)
+critic_optimizer = AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.003
+    maximize: False
+    weight_decay: 0.01
+)
+

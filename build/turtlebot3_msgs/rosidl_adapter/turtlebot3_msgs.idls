@@ -1,8 +1,0 @@
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:msg/SensorState.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:msg/Sound.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:msg/VersionInfo.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:srv/Sound.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:srv/DrlStep.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:srv/Goal.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:srv/RingGoal.idl
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_adapter/turtlebot3_msgs:action/Patrol.idl

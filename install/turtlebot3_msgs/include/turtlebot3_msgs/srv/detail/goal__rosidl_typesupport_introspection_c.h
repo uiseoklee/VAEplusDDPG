@@ -1,1 +1,0 @@
-/home/dmsgv1/VAEplusDDPG/build/turtlebot3_msgs/rosidl_typesupport_introspection_c/turtlebot3_msgs/srv/detail/goal__rosidl_typesupport_introspection_c.h
