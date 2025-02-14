@@ -1,0 +1,2 @@
+
+bool new_goal

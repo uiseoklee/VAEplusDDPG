@@ -1,0 +1,9 @@
+source;share/turtlebot3_drl/hook/pythonpath.ps1
+source;share/turtlebot3_drl/hook/pythonpath.dsv
+source;share/turtlebot3_drl/hook/pythonpath.sh
+source;share/turtlebot3_drl/hook/ament_prefix_path.ps1
+source;share/turtlebot3_drl/hook/ament_prefix_path.dsv
+source;share/turtlebot3_drl/hook/ament_prefix_path.sh
+source;../../build/turtlebot3_drl/share/turtlebot3_drl/hook/pythonpath_develop.ps1
+source;../../build/turtlebot3_drl/share/turtlebot3_drl/hook/pythonpath_develop.dsv
+source;../../build/turtlebot3_drl/share/turtlebot3_drl/hook/pythonpath_develop.sh

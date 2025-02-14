@@ -1,0 +1,1 @@
+/home/dmsgv1/VAEplusDDPG/src/turtlebot3_msgs/msg/VersionInfo.msg
