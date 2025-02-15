@@ -1,4 +1,9 @@
 ```bash
+# Prerequisite
+Ubuntu 20.04
+ROS2 foxy
+Turtlebot3 packages (refer to turtlebot3 emanual)
+
 # Terminal 1
 git clone git@github.com:uiseoklee/VAEplusDDPG.git
 cd VAEplusDDPG
