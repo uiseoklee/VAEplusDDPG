@@ -5,9 +5,12 @@ ROS2 foxy
 Turtlebot3 packages (refer to turtlebot3 emanual)
 
 # Terminal 1
-git clone git@github.com:uiseoklee/VAEplusDDPG.git
-cd ~/VAEplusDDPG
+git clone <your VAEplusDDPG fork repository>
+cd ~/vaeplusddpg
 colcon build --symlink-install
+
+<If you have "dart" error during build, you should clone NAVIGATION/dart>
+
 source install/setup.bash
 cd src/turtlebot3_simulations/turtlebot3_gazebo
 ros2 launch turtlebot3_gazebo turtlebot3_drl_stage6.launch.py
@@ -17,7 +20,7 @@ cd
 ros2 run turtlebot3_drl environment
 
 # Terminal 3
-cd ~/VAEplusDDPG/src/turtlebot3_drl/turtlebot3_drl/drl_agent
+cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
 ros2 run turtlebot3_drl train_agent ddpg
 
 # Terminal 4
