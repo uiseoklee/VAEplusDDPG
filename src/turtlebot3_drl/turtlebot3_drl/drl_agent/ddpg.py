@@ -13,7 +13,6 @@ from ..drl_environment.drl_environment import NUM_SCAN_SAMPLES
 from .off_policy_agent import OffPolicyAgent, Network
 import matplotlib.pyplot as plt
 
-# CBAM Module
 class CBAM(nn.Module):
     def __init__(self, in_channels):
         super().__init__()
@@ -46,7 +45,6 @@ class CBAM(nn.Module):
         x = x * spatial_out
         return x
 
-# Enhanced Light FPN Block
 class EnhancedLightFPNBlock(nn.Module):
     def __init__(self, in_channels, out_channels, up_channels):
         super().__init__()
@@ -68,7 +66,7 @@ class EnhancedLightFPNBlock(nn.Module):
         else:
             self.up_conv = nn.Identity()
 
-        # Downsample layer
+        # 다운샘플링 레이어 추가
         if in_channels != out_channels:
             self.downsample = nn.Conv2d(in_channels, out_channels, kernel_size=1)
         else:
@@ -76,7 +74,7 @@ class EnhancedLightFPNBlock(nn.Module):
     
     def forward(self, x, up=None):
         identity = x
-        # Apply downsample to identity
+        # identity에 다운샘플링 적용
         identity = self.downsample(identity)
 
         x = self.conv1(x)
@@ -95,7 +93,6 @@ class EnhancedLightFPNBlock(nn.Module):
         x = x + identity
         return x
 
-# Enhanced Residual Block
 class EnhancedResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
         super().__init__()
@@ -138,260 +135,10 @@ class EnhancedResidualBlock(nn.Module):
         out = F.gelu(out)
         return self.dropout(out)
 
-# Enhanced ConvTranspose2d Block with Attention
-class EnhancedConvTranspose2dBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, stride=2):
-        super().__init__()
-        self.conv1 = nn.ConvTranspose2d(in_channels, out_channels, 3, stride=stride, padding=1, output_padding=1)
-        self.gn1 = nn.GroupNorm(8, out_channels)
-        self.conv2 = nn.ConvTranspose2d(out_channels, out_channels, 3, padding=1)
-        self.gn2 = nn.GroupNorm(8, out_channels)
-        
-        self.cbam = CBAM(out_channels)
-        #self.se = nn.Sequential(
-        #    nn.AdaptiveAvgPool2d(1),
-        #    nn.Conv2d(out_channels, out_channels // 16, 1),
-        #    nn.ReLU(),
-        #    nn.Conv2d(out_channels // 16, out_channels, 1),
-        #    nn.Sigmoid()
-        #)
-        
-        self.dropout = nn.Dropout2d(0.1)
-        
-        self.upsample = None
-        if stride != 1 or in_channels != out_channels:
-            self.upsample = nn.Sequential(
-                nn.ConvTranspose2d(in_channels, out_channels, kernel_size=1, stride=stride, output_padding=1),
-                nn.GroupNorm(8, out_channels)
-            )
-    
-    def forward(self, x):
-        identity = x
-        out = F.gelu(self.gn1(self.conv1(x)))
-        out = self.gn2(self.conv2(out))
-        
-        out = self.cbam(out)
-        #out = out * self.se(out)
-        
-        if self.upsample is not None:
-            identity = self.upsample(x)
-            
-        out += identity
-        out = F.gelu(out)
-        return self.dropout(out)
-
-# VAE Class with Enhanced Blocks
-class Conv2dVAE(nn.Module):
-    def __init__(self, latent_dim):
-        super(Conv2dVAE, self).__init__()
-        
-        # Encoder
-        self.encoder_blocks = nn.ModuleList([
-            EnhancedResidualBlock(1, 32, stride=2),    # Output: (batch_size, 32, 40, 80)
-            EnhancedResidualBlock(32, 64, stride=2),   # Output: (batch_size, 64, 20, 40)
-            EnhancedResidualBlock(64, 128, stride=2)   # Output: (batch_size, 128, 10, 20)
-        ])
-        
-        # FPN Layers for Encoder
-        self.fpn_encoder = nn.ModuleList([
-            EnhancedLightFPNBlock(in_channels=128, out_channels=128, up_channels=128),
-            EnhancedLightFPNBlock(in_channels=64, out_channels=128, up_channels=128),
-            EnhancedLightFPNBlock(in_channels=32, out_channels=128, up_channels=128)
-        ])
-        
-        self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))  # Output: (batch_size, 128, 1, 1)
-        self.flatten = nn.Flatten()
-        self.fc_mu = nn.Linear(128, latent_dim)
-        self.fc_logvar = nn.Linear(128, latent_dim)
-        
-        # Decoder
-        self.decoder_input = nn.Linear(latent_dim, 128 * 10 * 20)
-        
-        self.decoder_blocks = nn.ModuleList([
-            EnhancedConvTranspose2dBlock(128, 128, stride=2),    # Output: (batch_size, 128, 20, 40)
-            EnhancedConvTranspose2dBlock(128, 64, stride=2),     # Output: (batch_size, 64, 40, 80)
-            EnhancedConvTranspose2dBlock(64, 32, stride=2),      # Output: (batch_size, 32, 80, 160)
-        ])
-        
-        self.final_layer = nn.Sequential(
-            nn.Conv2d(32, 1, kernel_size=3, padding=1),  # Output: (batch_size, 1, 80, 160)
-            nn.Sigmoid()
-        )
-    
-    def encode(self, x):
-        features = []
-        for encoder_block in self.encoder_blocks:
-            x = encoder_block(x)
-            features.append(x)
-        
-        # Apply FPN to the encoder features
-        x = None
-        for fpn_block, feature in zip(self.fpn_encoder, reversed(features)):
-            x = fpn_block(feature, x)
-        
-        x = self.adaptive_pool(x)
-        x = self.flatten(x)
-        mu = self.fc_mu(x)
-        logvar = self.fc_logvar(x)
-        return mu, logvar
-    
-    def reparameterize(self, mu, logvar):
-        logvar = torch.clamp(logvar, min=-10, max=10)
-        std = torch.exp(0.5 * logvar)
-        eps = torch.randn_like(std)
-        return mu + eps * std
-    
-    def decode(self, z):
-        x = self.decoder_input(z)
-        x = x.view(-1, 128, 10, 20)  # Initial shape for the decoder
-        
-        for decoder_block in self.decoder_blocks:
-            x = decoder_block(x)
-        
-        x = self.final_layer(x)
-        return x
-    
-    def forward(self, x):
-        mu, logvar = self.encode(x)
-        z = self.reparameterize(mu, logvar)
-        x_recon = self.decode(z)
-        return x_recon, mu, logvar
-
-#class Network(nn.Module):
-#    def __init__(self, name):
-#        super(Network, self).__init__()
-#        self.name = name
-#
-#    def init_weights(self, m):
-#        if isinstance(m, nn.Linear):
-#            torch.nn.init.orthogonal_(m.weight.data)
-#            if m.bias is not None:
-#                torch.nn.init.constant_(m.bias.data, 0)
-#        elif isinstance(m, nn.Conv2d):
-#            nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
-#            if m.bias is not None:
-#                nn.init.constant_(m.bias, 0)
-
-# Definition of Conv1dVAE Class
-class Conv1dVAE(nn.Module):
-    def __init__(self, latent_dim=32):
-        super(Conv1dVAE, self).__init__()
-        # Definition of Encoder
-        self.encoder = nn.Sequential(
-            nn.Conv1d(1, 32, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2, stride=2),  # 360 -> 180
-            nn.Conv1d(32, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2, stride=2),  # 180 -> 90
-            nn.Conv1d(64, 128, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.MaxPool1d(kernel_size=2, stride=2),  # 90 -> 45
-            nn.Conv1d(128, 256, kernel_size=3, stride=1, padding=1),
-            nn.ReLU()
-            # Remove MaxPool1d to keep sequence length 45
-        )
-        self.flatten = nn.Flatten()
-        self.fc_mu = nn.Linear(256 * 45, latent_dim)
-        self.fc_logvar = nn.Linear(256 * 45, latent_dim)
-
-        # Definition of Decoder
-        self.decoder_input = nn.Linear(latent_dim, 256 * 45)
-        self.decoder = nn.Sequential(
-            nn.ConvTranspose1d(256, 128, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.Upsample(scale_factor=2, mode='nearest'),  # 45 -> 90
-            nn.Conv1d(128, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.Upsample(scale_factor=2, mode='nearest'),  # 90 -> 180
-            nn.Conv1d(64, 32, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.Upsample(scale_factor=2, mode='nearest'),  # 180 -> 360
-            nn.Conv1d(32, 1, kernel_size=3, stride=1, padding=1),
-            nn.Sigmoid()  # limit output values to [0,1]
-        )
-
-    def encode(self, x):
-        x = self.encoder(x)
-        x = self.flatten(x)
-        mu = self.fc_mu(x)
-        logvar = self.fc_logvar(x)
-        return mu, logvar
-
-    def reparameterize(self, mu, logvar):
-        # limit logvar value
-        logvar = torch.clamp(logvar, min=-10, max=10)
-        std = torch.exp(0.5 * logvar)
-        eps = torch.randn_like(std)
-        return mu + eps * std
-
-    def decode(self, z):
-        x = self.decoder_input(z)
-        x = x.view(-1, 256, 45)
-        x = self.decoder(x)
-        return x
-
-    def forward(self, x):
-        mu, logvar = self.encode(x)
-        z = self.reparameterize(mu, logvar)
-        x_recon = self.decode(z)
-        return x_recon, mu, logvar
-
-# Modify Actor class
-class Actor(Network):
-    def __init__(self, name, state_size, action_size, hidden_size):
-        super(Actor, self).__init__(name)
-        # --- define layers here ---
-
-        # Load the first VAE model (for image1)
-        self.vae1 = Conv2dVAE(latent_dim=128)
-        self.vae1.load_state_dict(torch.load('vae_model1.pth', map_location=torch.device('cpu')), strict=False)
-        #self.vae1.eval()
-        self.vae1.train()
-
-        # Load the second VAE model (for image2)
-        self.vae2 = Conv2dVAE(latent_dim=128)
-        self.vae2.load_state_dict(torch.load('vae_model2.pth', map_location=torch.device('cpu')), strict=False)
-        #self.vae2.eval()
-        self.vae2.train()
-
-        self.vae3 = Conv1dVAE(latent_dim=32)
-        self.vae3.load_state_dict(torch.load('vae_model3.pth', map_location=torch.device('cpu')), strict=False)
-        self.vae3.train()        
-
-        # Fix encoder parameters
-        #for param in self.vae1.parameters():
-        #    param.requires_grad = False
-        #for param in self.vae2.parameters():
-        #    param.requires_grad = False
-
-        # Define fully connected layers to pass through after combining additional state information
-        conv_output_size = 128
-        lidar_output_size = 32
-        
-        self.fc1 = nn.Linear(conv_output_size * 2 + lidar_output_size + 4, hidden_size)
-        self.ln1 = nn.LayerNorm(hidden_size)
-        
-        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
-        self.ln2 = nn.LayerNorm(hidden_size // 2)
-        
-        self.fc3 = nn.Linear(hidden_size // 2, action_size)
-        
-        #self.se = nn.Sequential(
-        #    nn.Linear(hidden_size, hidden_size // 16),
-        #    nn.ReLU(),
-        #    nn.Linear(hidden_size // 16, hidden_size),
-        #    nn.Sigmoid()
-        #)
-        
-        self.dropout = nn.Dropout(p=0.1)
-        
-        # VAE
-        self.init_weights(self.fc1)
-        self.init_weights(self.fc2)
-        self.init_weights(self.fc3)
-        self.init_weights(self.ln1)
-        self.init_weights(self.ln2)
+class Network(nn.Module):
+    def __init__(self, name):
+        super(Network, self).__init__()
+        self.name = name
 
     def init_weights(self, m):
         if isinstance(m, nn.Linear) or isinstance(m, nn.Conv2d):
@@ -399,33 +146,53 @@ class Actor(Network):
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
 
-    #def init_weights(self, m):
-    #    if isinstance(m, nn.Linear) or isinstance(m, nn.Conv2d):
-    #        nn.init.xavier_uniform_(m.weight)
-    #        if m.bias is not None:
-    #            nn.init.zeros_(m.bias)
-
+class Actor(Network):
+    def __init__(self, name, state_size, action_size, hidden_size):
+        super().__init__(name)
+        
+        # Encoder layers
+        self.encoder = nn.ModuleList([
+            EnhancedResidualBlock(1, 32, stride=2),
+            EnhancedResidualBlock(32, 64, stride=2),
+            EnhancedResidualBlock(64, 128, stride=2)
+        ])
+        
+        # Light FPN layers
+        self.fpn = nn.ModuleList([
+            EnhancedLightFPNBlock(in_channels=128, out_channels=128, up_channels=128),
+            EnhancedLightFPNBlock(in_channels=64, out_channels=128, up_channels=128),
+            EnhancedLightFPNBlock(in_channels=32, out_channels=128, up_channels=128)
+        ])
+        
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.flatten = nn.Flatten()
+        
+        # Decision layers
+        self.fc1 = nn.Linear(256 + 4, hidden_size)
+        self.ln1 = nn.LayerNorm(hidden_size)
+        
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.ln2 = nn.LayerNorm(hidden_size // 2)
+        
+        self.fc3 = nn.Linear(hidden_size // 2, action_size)
+        
+        self.dropout = nn.Dropout(0.1)
+        
+        self.apply(self.init_weights)
+    
     def forward(self, states, visualize=False):
         depth_image_size = 80 * 160
-        lidar_output_size = 360
-
+        
         if states.dim() == 2:
-            # When batch is present
             li1 = states[:, :depth_image_size]
             li2 = states[:, depth_image_size:2 * depth_image_size]
-            li3 = states[:, 2 * depth_image_size:2 * depth_image_size + lidar_output_size]
             s1 = states[:, -4:]
         else:
-            # When batch is not present
             li1 = states[:depth_image_size].view(1, -1)
             li2 = states[depth_image_size:2 * depth_image_size].view(1, -1)
-            li3 = states[2 * depth_image_size:2 * depth_image_size + lidar_output_size].view(1, -1)
             s1 = states[-4:].view(1, -1)
 
-        #print("li1", li1, li1.min(), li1.max(), li1.shape, li1.dtype)
-        #print("li3", li3, li3.min(), li3.max(), li3.shape, li3.dtype)
-
-        darkness_factor = 1.0  # For 10% brightness
+        darkness_factor = 0.3  # For 10% brightness
 
 
         """
@@ -461,37 +228,42 @@ class Actor(Network):
 
         li1_imaged = li1.view(li1.size(0), 1, 80, 160)
         li2_imaged = li2.view(li2.size(0), 1, 80, 160)
-        li3_reshaped = li3.view(li3.size(0), 1, -1)
 
         # Apply darkness_factor
         li1_imaged = li1_imaged * darkness_factor
-        li2_imaged = li2_imaged * darkness_factor        
-
-
-        # Extract latent vector through the first VAE encoder
-        with torch.enable_grad():
-            mu1, logvar1 = self.vae1.encode(li1_imaged)
-            z1 = self.vae1.reparameterize(mu1, logvar1)
-
-            mu2, logvar2 = self.vae2.encode(li2_imaged)
-            z2 = self.vae2.reparameterize(mu2, logvar2)
-
-            mu3, logvar3 = self.vae3.encode(li3_reshaped)
-            z3 = self.vae3.reparameterize(mu3, logvar3)
-
-        # Combine the two latent vectors
-        #latent_vector = torch.cat((mu1, mu2), dim=1)  # (batch_size, 96)
-
-        # Combine additional state information
-        #li_s1 = torch.cat((latent_vector, s1), dim=1)  # (batch_size, 100)
-
-        # Pass through fully connected layers
-        x = torch.cat((z1, z2, z3, s1), dim=1)
+        li2_imaged = li2_imaged * darkness_factor 
+        
+        # Process first image
+        features1 = []
+        x1 = li1_imaged
+        for encoder_layer in self.encoder:
+            x1 = encoder_layer(x1)
+            features1.append(x1)
+        
+        # Process second image
+        features2 = []
+        x2 = li2_imaged
+        for encoder_layer in self.encoder:
+            x2 = encoder_layer(x2)
+            features2.append(x2)
+        
+        # FPN feature fusion
+        for fpn_block, f1, f2 in zip(self.fpn, reversed(features1), reversed(features2)):
+            x1 = fpn_block(f1, x1)
+            x2 = fpn_block(f2, x2)
+        
+        x1 = self.adaptive_pool(x1)
+        x1 = self.flatten(x1)
+        
+        x2 = self.adaptive_pool(x2)
+        x2 = self.flatten(x2)
+        
+        # Combine features
+        x = torch.cat((x1, x2, s1), dim=1)
         
         # Decision layers with residual connection
         #identity = x
         x = F.gelu(self.ln1(self.fc1(x)))
-        #x = x * self.se(x)
         x = self.dropout(x)
         
         x = F.gelu(self.ln2(self.fc2(x)))
@@ -507,149 +279,116 @@ class Actor(Network):
         
         return action
 
-# Modify Critic class
 class Critic(Network):
     def __init__(self, name, state_size, action_size, hidden_size):
-        super(Critic, self).__init__(name)
-        # --- define layers here ---
-
-        # --- Integrate VAE encoder ---
-        # Load the first VAE model (for image1)
-        self.vae1 = Conv2dVAE(latent_dim=128)
-        self.vae1.load_state_dict(torch.load('vae_model1.pth', map_location=torch.device('cpu')), strict=False)
-        #self.vae1.eval()
-        self.vae1.train()
-
-        # Load the second VAE model (for image2)
-        self.vae2 = Conv2dVAE(latent_dim=128)
-        self.vae2.load_state_dict(torch.load('vae_model2.pth', map_location=torch.device('cpu')), strict=False)
-        #self.vae2.eval()
-        self.vae2.train()
-
-        self.vae3 = Conv1dVAE(latent_dim=32)
-        self.vae3.load_state_dict(torch.load('vae_model3.pth', map_location=torch.device('cpu')), strict=False)
-        self.vae3.train()
-
-        # Fix encoder parameters to prevent training
-        #for param in self.vae1.parameters():
-        #    param.requires_grad = False
-        #for param in self.vae2.parameters():
-        #    param.requires_grad = False
-
-        # --- Define Critic network layers ---
-        conv_output_size = 128
-        lidar_output_size = 32
+        super().__init__(name)
         
-        self.fc1 = nn.Linear(conv_output_size * 2 + lidar_output_size + 4, 256)
-        self.ln1 = nn.LayerNorm(256)
+        # Encoder layers
+        self.encoder = nn.ModuleList([
+            EnhancedResidualBlock(1, 32, stride=2),
+            EnhancedResidualBlock(32, 64, stride=2),
+            EnhancedResidualBlock(64, 128, stride=2)
+        ])
         
-        self.fc2 = nn.Linear(action_size, 256)
-        self.ln2 = nn.LayerNorm(256)
+        # Light FPN layers
+        self.fpn = nn.ModuleList([
+            EnhancedLightFPNBlock(in_channels=128, out_channels=128, up_channels=128),
+            EnhancedLightFPNBlock(in_channels=64, out_channels=128, up_channels=128),
+            EnhancedLightFPNBlock(in_channels=32, out_channels=128, up_channels=128)
+        ])
         
-        self.fc3 = nn.Linear(512, 512)
-        self.ln3 = nn.LayerNorm(512)
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.flatten = nn.Flatten()
         
-        self.fc4 = nn.Linear(512, 1)
+        # Action processing
+        self.action_fc = nn.Linear(action_size, hidden_size // 2)
+        self.action_ln = nn.LayerNorm(hidden_size // 2)
         
-        #self.se = nn.Sequential(
-        #    nn.Linear(256, 256 // 16),
-        #    nn.ReLU(),
-        #    nn.Linear(256 // 16, 256),
-        #    nn.Sigmoid()
-        #)
+        # Combined processing
+        self.fc1 = nn.Linear(256 + hidden_size // 2 + 4, hidden_size)
+        self.ln1 = nn.LayerNorm(hidden_size)
         
-        self.dropout = nn.Dropout(p=0.2)
+        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
+        self.ln2 = nn.LayerNorm(hidden_size // 2)
         
-        # VAE
-        self.init_weights(self.fc1)
-        self.init_weights(self.fc2)
-        self.init_weights(self.fc3)
-        self.init_weights(self.fc4)
-        self.init_weights(self.ln1)
-        self.init_weights(self.ln2)
-        self.init_weights(self.ln3)
-
-    def init_weights(self, m):
-        if isinstance(m, nn.Linear) or isinstance(m, nn.Conv2d):
-            nn.init.xavier_uniform_(m.weight)
-            if m.bias is not None:
-                nn.init.zeros_(m.bias)
-
-    def forward(self, states, actions, visualize=False):
+        self.fc3 = nn.Linear(hidden_size // 2, 1)
+        
+        self.dropout = nn.Dropout(0.1)
+        
+        self.apply(self.init_weights)
+    
+    def forward(self, states, actions):
         depth_image_size = 80 * 160
-        lidar_output_size = 360
-
+        
         if states.dim() == 2:
-            # When batch is present
             li1 = states[:, :depth_image_size]
             li2 = states[:, depth_image_size:2 * depth_image_size]
-            li3 = states[:, 2 * depth_image_size:2 * depth_image_size + lidar_output_size]
             s1 = states[:, -4:]
         else:
-            # When batch is not present
             li1 = states[:depth_image_size].view(1, -1)
             li2 = states[depth_image_size:2 * depth_image_size].view(1, -1)
-            li3 = states[2 * depth_image_size:2 * depth_image_size + lidar_output_size].view(1, -1)
             s1 = states[-4:].view(1, -1)
-
-        # Normalize data in the same way as during VAE training
-        #li1_normalized = li1 / 255.0  # Scale pixel values to [0,1]
-
-        # Convert to channel and image dimensions
+        
         li1_imaged = li1.view(li1.size(0), 1, 80, 160)
         li2_imaged = li2.view(li2.size(0), 1, 80, 160)
-        li3_reshaped = li3.view(li3.size(0), 1, -1)
 
 
-        darkness_factor = 1.0  # For 10% brightness
- 
+
+        darkness_factor = 0.3 # For 10% brightness
+
         # Apply darkness_factor
         li1_imaged = li1_imaged * darkness_factor
-        li2_imaged = li2_imaged * darkness_factor         
+        li2_imaged = li2_imaged * darkness_factor
 
 
 
-        # Extract latent vector through the first VAE encoder
-        with torch.enable_grad():
-            mu1, logvar1 = self.vae1.encode(li1_imaged)
-            z1 = self.vae1.reparameterize(mu1, logvar1)
-
-            mu2, logvar2 = self.vae2.encode(li2_imaged)
-            z2 = self.vae2.reparameterize(mu2, logvar2)
-
-            mu3, logvar3 = self.vae3.encode(li3_reshaped)
-            z3 = self.vae3.reparameterize(mu3, logvar3)
-
-        # Combine the two latent vectors
-        #latent_vector = torch.cat((mu1, mu2), dim=1)  # (batch_size, 96)
-
-        # Combine additional state information
-        #li_s1 = torch.cat((latent_vector, s1), dim=1)  # (batch_size, 100)
-
-        # Pass through Critic network layers
-        xs = torch.cat((z1, z2, z3, s1), dim=1)
+        # Process first image
+        features1 = []
+        x1 = li1_imaged
+        for encoder_layer in self.encoder:
+            x1 = encoder_layer(x1)
+            features1.append(x1)
         
-        xs = self.fc1(xs)
-        xs = self.ln1(xs)
-        xs = F.gelu(xs)
-        #xs = xs * self.se(xs)
-        xs = self.dropout(xs)
+        # Process second image
+        features2 = []
+        x2 = li2_imaged
+        for encoder_layer in self.encoder:
+            x2 = encoder_layer(x2)
+            features2.append(x2)
         
-        xa = self.fc2(actions)
-        xa = self.ln2(xa)
-        xa = F.gelu(xa)
-        xa = self.dropout(xa)
+        # FPN feature fusion
+        for fpn_block, f1, f2 in zip(self.fpn, reversed(features1), reversed(features2)):
+            x1 = fpn_block(f1, x1)
+            x2 = fpn_block(f2, x2)
         
-        x = torch.cat((xs, xa), dim=1)
+        x1 = self.adaptive_pool(x1)
+        x1 = self.flatten(x1)
+
+        x2 = self.adaptive_pool(x2)
+        x2 = self.flatten(x2)
         
-        x = self.fc3(x)
-        x = self.ln3(x)
-        x = F.gelu(x)
+        # Process state features
+        state_features = torch.cat((x1, x2, s1), dim=1)
+        
+        # Process actions
+        action_features = F.gelu(self.action_ln(self.action_fc(actions)))
+        
+        # Combine features
+        x = torch.cat((state_features, action_features), dim=1)
+        
+        # Decision layers with residual connection
+        #identity = x
+        x = F.gelu(self.ln1(self.fc1(x)))
         x = self.dropout(x)
         
-        value = self.fc4(x)
+        x = F.gelu(self.ln2(self.fc2(x)))
+        x = self.dropout(x)
+        #x = x + identity[:, :x.size(1)]  # Residual connection
+        
+        value = self.fc3(x)
         
         return value
+
 
 class DDPG(OffPolicyAgent):
     def __init__(self, device, sim_speed):
