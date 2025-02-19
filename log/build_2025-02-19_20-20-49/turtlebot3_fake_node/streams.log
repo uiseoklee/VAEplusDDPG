@@ -1,0 +1,81 @@
+[0.005s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake /home/dmsgv1/vaeplusddpg/src/turtlebot3_simulations/turtlebot3_fake_node -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node
+[0.029s] -- The C compiler identification is GNU 9.4.0
+[0.054s] -- The CXX compiler identification is GNU 9.4.0
+[0.056s] -- Check for working C compiler: /bin/cc
+[0.087s] -- Check for working C compiler: /bin/cc -- works
+[0.088s] -- Detecting C compiler ABI info
+[0.118s] -- Detecting C compiler ABI info - done
+[0.123s] -- Detecting C compile features
+[0.123s] -- Detecting C compile features - done
+[0.124s] -- Check for working CXX compiler: /bin/c++
+[0.159s] -- Check for working CXX compiler: /bin/c++ -- works
+[0.160s] -- Detecting CXX compiler ABI info
+[0.195s] -- Detecting CXX compiler ABI info - done
+[0.201s] -- Detecting CXX compile features
+[0.201s] -- Detecting CXX compile features - done
+[0.202s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.213s] -- Found PythonInterp: /bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.213s] -- Using PYTHON_EXECUTABLE: /bin/python3
+[0.288s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.298s] -- Found geometry_msgs: 2.0.5 (/opt/ros/foxy/share/geometry_msgs/cmake)
+[0.313s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.316s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.349s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.364s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.401s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.440s] -- Found nav_msgs: 2.0.5 (/opt/ros/foxy/share/nav_msgs/cmake)
+[0.474s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.494s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.495s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.495s] -- Looking for pthread.h
+[0.526s] -- Looking for pthread.h - found
+[0.527s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.558s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[0.558s] -- Looking for pthread_create in pthreads
+[0.584s] -- Looking for pthread_create in pthreads - not found
+[0.584s] -- Looking for pthread_create in pthread
+[0.614s] -- Looking for pthread_create in pthread - found
+[0.615s] -- Found Threads: TRUE  
+[0.679s] -- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+[0.712s] -- Found tf2: 0.13.14 (/opt/ros/foxy/share/tf2/cmake)
+[0.717s] -- Found tf2_msgs: 0.13.14 (/opt/ros/foxy/share/tf2_msgs/cmake)
+[0.804s] -- Found turtlebot3_msgs: 2.2.1 (/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/share/turtlebot3_msgs/cmake)
+[0.876s] -- Configuring done
+[0.881s] -- Generating done
+[0.882s] -- Build files have been written to: /home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node
+[0.887s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node' returned '0': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake /home/dmsgv1/vaeplusddpg/src/turtlebot3_simulations/turtlebot3_fake_node -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node
+[0.887s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake --build /home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node -- -j28 -l28
+[0.904s] [35m[1mScanning dependencies of target turtlebot3_fake_node[0m
+[0.921s] [ 50%] [32mBuilding CXX object CMakeFiles/turtlebot3_fake_node.dir/src/turtlebot3_fake_node.cpp.o[0m
+[3.511s] [100%] [32m[1mLinking CXX executable turtlebot3_fake_node[0m
+[3.635s] [100%] Built target turtlebot3_fake_node
+[3.640s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node' returned '0': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake --build /home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node -- -j28 -l28
+[3.650s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake --install /home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node
+[3.653s] -- Install configuration: ""
+[3.653s] -- Execute custom install script
+[3.654s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/lib/turtlebot3_fake_node/turtlebot3_fake_node
+[3.657s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/rviz2.launch.py
+[3.661s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/turtlebot3_fake_node.launch.py
+[3.665s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/burger.yaml
+[3.668s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle.yaml
+[3.674s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle_pi.yaml
+[3.680s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/rviz/model.rviz
+[3.686s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/include//turtlebot3_fake_node/turtlebot3_fake_node.hpp
+[3.693s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/ament_index/resource_index/package_run_dependencies/turtlebot3_fake_node
+[3.700s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/ament_index/resource_index/parent_prefix_path/turtlebot3_fake_node
+[3.708s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.sh
+[3.712s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.dsv
+[3.716s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.sh
+[3.719s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.dsv
+[3.722s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.bash
+[3.726s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.sh
+[3.729s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.zsh
+[3.732s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.dsv
+[3.736s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.dsv
+[3.739s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/ament_index/resource_index/packages/turtlebot3_fake_node
+[3.742s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.746s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.750s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig.cmake
+[3.753s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig-version.cmake
+[3.756s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.xml
+[3.764s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node' returned '0': AMENT_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_simulations:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_fake_node:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_msgs:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_gazebo:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy LD_LIBRARY_PATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dmsgv1/vaeplusddpg/install/turtlebot3_msgs/lib/python3.8/site-packages:${PYTHONPATH} /bin/cmake --install /home/dmsgv1/vaeplusddpg/build/turtlebot3_fake_node

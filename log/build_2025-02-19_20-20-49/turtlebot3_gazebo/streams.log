@@ -1,0 +1,439 @@
+[0.009s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake /home/dmsgv1/vaeplusddpg/src/turtlebot3_simulations/turtlebot3_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo
+[0.031s] -- The C compiler identification is GNU 9.4.0
+[0.054s] -- The CXX compiler identification is GNU 9.4.0
+[0.056s] -- Check for working C compiler: /bin/cc
+[0.084s] -- Check for working C compiler: /bin/cc -- works
+[0.085s] -- Detecting C compiler ABI info
+[0.114s] -- Detecting C compiler ABI info - done
+[0.119s] -- Detecting C compile features
+[0.119s] -- Detecting C compile features - done
+[0.120s] -- Check for working CXX compiler: /bin/c++
+[0.153s] -- Check for working CXX compiler: /bin/c++ -- works
+[0.154s] -- Detecting CXX compiler ABI info
+[0.186s] -- Detecting CXX compiler ABI info - done
+[0.192s] -- Detecting CXX compile features
+[0.192s] -- Detecting CXX compile features - done
+[0.193s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.204s] -- Found PythonInterp: /bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.204s] -- Using PYTHON_EXECUTABLE: /bin/python3
+[0.275s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.287s] -- Found PkgConfig: /bin/pkg-config (found version "0.29.1") 
+[0.289s] -- Checking for module 'bullet>=2.82'
+[0.295s] --   Found bullet, version 2.88
+[0.344s] -- Found ccd: /usr/include (found suitable version "2.0", minimum required is "2.0") 
+[0.364s] -- Found fcl: /usr/include (found suitable version "0.5.0", minimum required is "0.3.2") 
+[0.385s] -- Found assimp: /usr/include (found version "5.0.0") 
+[0.394s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[0.525s] -- Found Boost: /lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.40.0") found components: thread system filesystem program_options regex iostreams date_time 
+[0.534s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found version "3.6.1") 
+[0.536s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.541s] -- Searching for dependencies of ignition-math6
+[0.541s] -- Looking for OGRE...
+[0.542s] -- OGRE_PREFIX_WATCH changed.
+[0.544s] -- Checking for module 'OGRE'
+[0.550s] --   Found OGRE, version 1.9.0
+[0.564s] -- Found Ogre Ghadamon (1.9.0)
+[0.568s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[0.573s] -- Looking for OGRE_Paging...
+[0.576s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[0.576s] -- Looking for OGRE_Terrain...
+[0.578s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[0.578s] -- Looking for OGRE_Property...
+[0.581s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[0.581s] -- Looking for OGRE_RTShaderSystem...
+[0.584s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[0.584s] -- Looking for OGRE_Volume...
+[0.586s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[0.586s] -- Looking for OGRE_Overlay...
+[0.589s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[0.643s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.644s] -- Looking for ignition-transport8 -- found version 8.3.0
+[0.644s] -- Searching for dependencies of ignition-transport8
+[0.652s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so;-lpthread (found suitable version "3.6.1", minimum required is "3") 
+[0.657s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[0.659s] -- Checking for module 'libzmq >= 4'
+[0.665s] --   Found libzmq , version 4.3.2
+[0.681s] -- Found ZeroMQ: TRUE (Required is at least version "4") 
+[0.683s] -- Checking for module 'uuid'
+[0.689s] --   Found uuid, version 2.34.0
+[0.704s] -- Found UUID: TRUE  
+[0.704s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[0.705s] -- Searching for dependencies of ignition-msgs5
+[0.713s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.715s] -- Checking for module 'tinyxml2'
+[0.721s] --   Found tinyxml2, version 6.2.0
+[0.737s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[0.737s] -- Looking for ignition-common3 -- found version 3.14.2
+[0.738s] -- Searching for dependencies of ignition-common3
+[0.738s] -- Looking for dlfcn.h - found
+[0.738s] -- Looking for libdl - found
+[0.739s] -- Found DL: TRUE  
+[0.743s] -- Searching for <ignition-common3> component [graphics]
+[0.743s] -- Looking for ignition-common3-graphics -- found version 3.14.2
+[0.743s] -- Searching for dependencies of ignition-common3-graphics
+[0.744s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.745s] -- Looking for ignition-fuel_tools4 -- found version 4.6.0
+[0.745s] -- Searching for dependencies of ignition-fuel_tools4
+[0.775s] -- Found CURL: /usr/lib/x86_64-linux-gnu/libcurl.so (found version "7.68.0")  
+[0.778s] -- Checking for module 'jsoncpp'
+[0.785s] --   Found jsoncpp, version 1.7.4
+[0.800s] -- Found JSONCPP: TRUE  
+[0.802s] -- Checking for module 'libzip'
+[0.808s] --   Found libzip, version 1.5.1
+[0.823s] -- Found ZIP: TRUE  
+[0.823s] -- Looking for ignition-common3 -- found version 3.14.2
+[0.823s] -- Looking for ignition-math6 -- found version 6.15.1
+[0.823s] -- Looking for ignition-msgs5 -- found version 5.10.0
+[0.824s] -- Found gazebo_ros_pkgs: 3.5.3 (/opt/ros/foxy/share/gazebo_ros_pkgs/cmake)
+[0.825s] -- Found geometry_msgs: 2.0.5 (/opt/ros/foxy/share/geometry_msgs/cmake)
+[0.835s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.838s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.871s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.882s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.918s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.957s] -- Found nav_msgs: 2.0.5 (/opt/ros/foxy/share/nav_msgs/cmake)
+[0.991s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[1.010s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[1.011s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.012s] -- Found Threads: TRUE  
+[1.076s] -- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+[1.110s] -- Found tf2: 0.13.14 (/opt/ros/foxy/share/tf2/cmake)
+[1.149s] -- Configuring done
+[1.166s] -- Generating done
+[1.167s] -- Build files have been written to: /home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo
+[1.174s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake /home/dmsgv1/vaeplusddpg/src/turtlebot3_simulations/turtlebot3_gazebo -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo
+[1.174s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake --build /home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo -- -j28 -l28
+[1.193s] [35m[1mScanning dependencies of target obstacles[0m
+[1.196s] [35m[1mScanning dependencies of target obstacle2[0m
+[1.196s] [35m[1mScanning dependencies of target obstacle1[0m
+[1.196s] [35m[1mScanning dependencies of target turtlebot3_drive[0m
+[1.229s] [ 12%] [32mBuilding CXX object CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o[0m
+[1.234s] [ 25%] [32mBuilding CXX object CMakeFiles/obstacles.dir/models/turtlebot3_drl_world/obstacle_plugin/obstacles.cc.o[0m
+[1.241s] [ 37%] [32mBuilding CXX object CMakeFiles/obstacle1.dir/models/turtlebot3_drl_world/obstacle_plugin/obstacle1.cc.o[0m
+[1.242s] [ 50%] [32mBuilding CXX object CMakeFiles/obstacle2.dir/models/turtlebot3_drl_world/obstacle_plugin/obstacle2.cc.o[0m
+[4.367s] [ 62%] [32m[1mLinking CXX executable turtlebot3_drive[0m
+[4.500s] [ 62%] Built target turtlebot3_drive
+[5.387s] [ 75%] [32m[1mLinking CXX shared library libobstacles.so[0m
+[5.397s] [ 87%] [32m[1mLinking CXX shared library libobstacle2.so[0m
+[5.422s] [100%] [32m[1mLinking CXX shared library libobstacle1.so[0m
+[5.506s] [100%] Built target obstacles
+[5.517s] [100%] Built target obstacle2
+[5.539s] [100%] Built target obstacle1
+[5.545s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake --build /home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo -- -j28 -l28
+[5.557s] Invoking command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake --install /home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo
+[5.560s] -- Install configuration: ""
+[5.560s] -- Execute custom install script
+[5.560s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/lib/turtlebot3_gazebo/turtlebot3_drive
+[5.564s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//launch/robot_state_publisher.launch.py
+[5.568s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//launch/turtlebot3_drl_stage6.launch.py
+[5.572s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/rec_table/model.config
+[5.576s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/rec_table/model.sdf
+[5.579s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/table/model (copy).sdf
+[5.582s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/table/model.config
+[5.586s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/table/model.sdf
+[5.589s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/meshes/burger_base.dae
+[5.592s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/meshes/lds.dae
+[5.595s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/meshes/tire.dae
+[5.598s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/model-1_4.sdf
+[5.602s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/model.config
+[5.605s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_burger/model.sdf
+[5.608s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_stage6/model (copy).sdf
+[5.612s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_stage6/model.config
+[5.615s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_stage6/model.sdf
+[5.618s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_stage6/model_difficult.sdf
+[5.622s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/goal_box/model.config
+[5.625s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/goal_box/model.sdf
+[5.629s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_obstacles/model.config
+[5.632s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_obstacles/model.sdf
+[5.635s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_walls/model.config
+[5.639s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_walls/model.sdf
+[5.642s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_walls/model_wallhigh.sdf
+[5.646s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_walls_large/model.config
+[5.649s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/inner_walls_large/model.sdf
+[5.652s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/long_wall/model.config
+[5.655s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/long_wall/model.sdf
+[5.659s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/model.config
+[5.662s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/model.sdf
+[5.665s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/model_high.sdf
+[5.668s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle1/model.config
+[5.672s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle1/model.sdf
+[5.675s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle1/model_small.sdf
+[5.678s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle10/model.config
+[5.681s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle10/model.sdf
+[5.685s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle11/model.config
+[5.688s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle11/model.sdf
+[5.691s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle12/model.config
+[5.694s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle12/model.sdf
+[5.698s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle2/model.config
+[5.701s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle2/model.sdf
+[5.704s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle2/model_small.sdf
+[5.707s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle3/model.config
+[5.711s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle3/model.sdf
+[5.714s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle3/model_small.sdf
+[5.717s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle4/model.config
+[5.720s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle4/model.sdf
+[5.723s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle4/model_small.sdf
+[5.727s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle5/model.config
+[5.730s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle5/model.sdf
+[5.733s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle5/model_small.sdf
+[5.737s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle6/model.config
+[5.740s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle6/model.sdf
+[5.743s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle6/model_small.sdf
+[5.747s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle7/model.config
+[5.750s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle7/model.sdf
+[5.754s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle8/model.config
+[5.757s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle8/model.sdf
+[5.760s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle9/model.config
+[5.763s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle9/model.sdf
+[5.767s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/CMakeLists.txt
+[5.770s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeCache.txt
+[5.774s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CMakeCCompiler.cmake
+[5.777s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CMakeCXXCompiler.cmake
+[5.781s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CMakeDetermineCompilerABI_C.bin
+[5.784s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CMakeDetermineCompilerABI_CXX.bin
+[5.787s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CMakeSystem.cmake
+[5.790s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CompilerIdC/CMakeCCompilerId.c
+[5.794s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CompilerIdC/a.out
+[5.797s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CompilerIdCXX/CMakeCXXCompilerId.cpp
+[5.801s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/3.16.3/CompilerIdCXX/a.out
+[5.804s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/CMakeDirectoryInformation.cmake
+[5.808s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/CMakeError.log
+[5.811s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/CMakeOutput.log
+[5.814s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/Makefile.cmake
+[5.817s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/Makefile2
+[5.821s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/TargetDirectories.txt
+[5.824s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/cmake.check_cache
+[5.827s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/CXX.includecache
+[5.830s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/DependInfo.cmake
+[5.833s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/build.make
+[5.837s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/cmake_clean.cmake
+[5.840s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/depend.internal
+[5.843s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/depend.make
+[5.847s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/flags.make
+[5.850s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/link.txt
+[5.853s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/obstacle1.cc.o
+[5.856s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle1.dir/progress.make
+[5.860s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/CXX.includecache
+[5.863s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/DependInfo.cmake
+[5.866s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/build.make
+[5.869s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/cmake_clean.cmake
+[5.872s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/depend.internal
+[5.876s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/depend.make
+[5.879s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/flags.make
+[5.882s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/link.txt
+[5.885s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/obstacle10.cc.o
+[5.889s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle10.dir/progress.make
+[5.892s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/CXX.includecache
+[5.895s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/DependInfo.cmake
+[5.898s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/build.make
+[5.902s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/cmake_clean.cmake
+[5.905s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/depend.internal
+[5.908s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/depend.make
+[5.911s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/flags.make
+[5.914s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/link.txt
+[5.918s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/obstacle11.cc.o
+[5.921s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle11.dir/progress.make
+[5.924s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/CXX.includecache
+[5.928s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/DependInfo.cmake
+[5.931s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/build.make
+[5.934s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/cmake_clean.cmake
+[5.937s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/depend.internal
+[5.940s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/depend.make
+[5.944s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/flags.make
+[5.947s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/link.txt
+[5.950s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/obstacle12.cc.o
+[5.953s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle12.dir/progress.make
+[5.956s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/CXX.includecache
+[5.960s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/DependInfo.cmake
+[5.963s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/build.make
+[5.966s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/cmake_clean.cmake
+[5.969s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/depend.internal
+[5.973s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/depend.make
+[5.976s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/flags.make
+[5.979s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/link.txt
+[5.982s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/obstacle2.cc.o
+[5.986s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle2.dir/progress.make
+[5.989s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/CXX.includecache
+[5.992s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/DependInfo.cmake
+[5.996s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/build.make
+[5.999s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/cmake_clean.cmake
+[6.002s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/depend.internal
+[6.005s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/depend.make
+[6.009s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/flags.make
+[6.012s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/link.txt
+[6.015s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/obstacle3.cc.o
+[6.018s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle3.dir/progress.make
+[6.022s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/CXX.includecache
+[6.025s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/DependInfo.cmake
+[6.028s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/build.make
+[6.031s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/cmake_clean.cmake
+[6.034s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/depend.internal
+[6.038s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/depend.make
+[6.041s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/flags.make
+[6.045s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/link.txt
+[6.048s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/obstacle4.cc.o
+[6.051s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle4.dir/progress.make
+[6.054s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/CXX.includecache
+[6.057s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/DependInfo.cmake
+[6.061s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/build.make
+[6.064s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/cmake_clean.cmake
+[6.067s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/depend.internal
+[6.070s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/depend.make
+[6.074s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/flags.make
+[6.077s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/link.txt
+[6.080s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/obstacle5.cc.o
+[6.083s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle5.dir/progress.make
+[6.087s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/CXX.includecache
+[6.090s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/DependInfo.cmake
+[6.093s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/build.make
+[6.096s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/cmake_clean.cmake
+[6.099s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/depend.internal
+[6.103s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/depend.make
+[6.106s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/flags.make
+[6.109s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/link.txt
+[6.113s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/obstacle6.cc.o
+[6.116s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle6.dir/progress.make
+[6.119s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/CXX.includecache
+[6.123s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/DependInfo.cmake
+[6.126s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/build.make
+[6.130s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/cmake_clean.cmake
+[6.133s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/depend.internal
+[6.137s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/depend.make
+[6.140s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/flags.make
+[6.144s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/link.txt
+[6.147s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/obstacle7.cc.o
+[6.150s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle7.dir/progress.make
+[6.154s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/CXX.includecache
+[6.157s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/DependInfo.cmake
+[6.161s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/build.make
+[6.164s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/cmake_clean.cmake
+[6.167s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/depend.internal
+[6.171s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/depend.make
+[6.174s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/flags.make
+[6.177s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/link.txt
+[6.181s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/obstacle8.cc.o
+[6.184s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle8.dir/progress.make
+[6.188s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/CXX.includecache
+[6.191s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/DependInfo.cmake
+[6.194s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/build.make
+[6.198s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/cmake_clean.cmake
+[6.201s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/depend.internal
+[6.204s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/depend.make
+[6.208s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/flags.make
+[6.211s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/link.txt
+[6.214s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/obstacle9.cc.o
+[6.218s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacle9.dir/progress.make
+[6.221s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/CXX.includecache
+[6.224s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/DependInfo.cmake
+[6.227s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/build.make
+[6.230s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/cmake_clean.cmake
+[6.234s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/depend.internal
+[6.237s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/depend.make
+[6.240s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/flags.make
+[6.243s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/link.txt
+[6.247s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/obstacles.cc.o
+[6.250s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/obstacles.dir/progress.make
+[6.253s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/CMakeFiles/progress.marks
+[6.256s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/Makefile
+[6.259s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/cmake_install.cmake
+[6.263s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle1.so
+[6.266s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle10.so
+[6.269s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle11.so
+[6.272s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle12.so
+[6.276s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle2.so
+[6.279s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle3.so
+[6.282s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle4.so
+[6.285s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle5.so
+[6.288s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle6.so
+[6.292s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle7.so
+[6.295s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle8.so
+[6.298s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacle9.so
+[6.301s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/lib/libobstacles.so
+[6.304s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle1.cc
+[6.308s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle10.cc
+[6.311s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle11.cc
+[6.314s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle12.cc
+[6.317s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle13.cc
+[6.321s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle2.cc
+[6.324s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle3.cc
+[6.327s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle4.cc
+[6.330s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle5.cc
+[6.334s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle6.cc
+[6.337s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle7.cc
+[6.340s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle8.cc
+[6.344s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacle9.cc
+[6.347s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacle_plugin/obstacles.cc
+[6.350s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacles/model.config
+[6.354s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/obstacles/model.sdf
+[6.357s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/outer_walls/model.config
+[6.360s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/outer_walls/model.sdf
+[6.363s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/outer_walls/model_wallhigh.sdf
+[6.367s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/outer_walls_large/model.config
+[6.370s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/outer_walls_large/model.sdf
+[6.373s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/triangle/model.config
+[6.377s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/triangle/model.sdf
+[6.380s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/turtlebot3_house_tomas/model.config
+[6.383s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_drl_world/turtlebot3_house_tomas/model.sdf
+[6.387s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_house/model.config
+[6.390s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_house/model.sdf
+[6.393s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/meshes/lds.dae
+[6.397s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/meshes/r200.dae
+[6.400s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/meshes/tire.dae
+[6.403s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/meshes/waffle_base.dae
+[6.407s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/model-1_4.sdf
+[6.410s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/model.config
+[6.413s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle/model.sdf
+[6.417s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/meshes/lds.dae
+[6.420s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/meshes/tire.dae
+[6.424s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/meshes/waffle_pi_base.dae
+[6.427s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model-1_4_.sdf
+[6.430s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model.config
+[6.434s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model.sdf
+[6.437s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_1depth_nopillar.sdf
+[6.440s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_1depth_pillar.sdf
+[6.444s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_2depths_nopillar.sdf
+[6.447s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_2depths_old.sdf
+[6.450s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_4depths.sdf
+[6.454s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_copy.sdf
+[6.457s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_waffle_pi/model_depth_noise_fail.sdf
+[6.460s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_world/meshes/hexagon.dae
+[6.464s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_world/meshes/wall.dae
+[6.467s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_world/model-1_4.sdf
+[6.470s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_world/model.config
+[6.473s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//models/turtlebot3_world/model.sdf
+[6.477s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//rviz/tb3_gazebo.rviz
+[6.480s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage4/burger.model
+[6.483s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage4/waffle.model
+[6.487s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage4/waffle_pi (copy).model
+[6.490s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage4/waffle_pi.model
+[6.493s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage4/waffle_pi_headless.model
+[6.496s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/burger.model
+[6.500s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle.model
+[6.503s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi.model
+[6.506s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_4obstacles.model
+[6.510s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_copy.model
+[6.513s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_difficult.model
+[6.516s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_easy_obstacle4.model
+[6.519s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_nomaldifficult.model
+[6.523s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_noobstacle.model
+[6.526s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_obstacle12.model
+[6.529s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo//worlds/turtlebot3_drl_stage6/waffle_pi_onlydesks.model
+[6.533s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/include//turtlebot3_gazebo/turtlebot3_drive.hpp
+[6.536s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/ament_index/resource_index/package_run_dependencies/turtlebot3_gazebo
+[6.539s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/ament_index/resource_index/parent_prefix_path/turtlebot3_gazebo
+[6.542s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/environment/ament_prefix_path.sh
+[6.546s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/environment/ament_prefix_path.dsv
+[6.549s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/environment/path.sh
+[6.552s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/environment/path.dsv
+[6.556s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/local_setup.bash
+[6.559s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/local_setup.sh
+[6.562s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/local_setup.zsh
+[6.565s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/local_setup.dsv
+[6.568s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/package.dsv
+[6.572s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/ament_index/resource_index/packages/turtlebot3_gazebo
+[6.575s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.578s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.582s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/cmake/turtlebot3_gazeboConfig.cmake
+[6.585s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/cmake/turtlebot3_gazeboConfig-version.cmake
+[6.589s] -- Symlinking: /home/dmsgv1/vaeplusddpg/install/turtlebot3_gazebo/share/turtlebot3_gazebo/package.xml
+[6.594s] Invoked command in '/home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dmsgv1/VAEplusDDPG/install/turtlebot3_drl:/opt/ros/foxy /bin/cmake --install /home/dmsgv1/vaeplusddpg/build/turtlebot3_gazebo

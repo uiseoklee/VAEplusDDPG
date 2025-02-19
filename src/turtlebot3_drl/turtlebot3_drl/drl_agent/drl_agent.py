@@ -82,9 +82,8 @@ class DrlAgent(Node):
             self.model = self.sm.load_model()
             self.model.device = self.device
             self.sm.load_weights(self.model.networks)
-            # Removed loading of replay buffer
-            # if self.training:
-            #     self.replay_buffer.buffer = self.sm.load_replay_buffer(self.model.buffer_size, os.path.join(self.load_session, 'stage'+str(self.sm.stage)+'_latest_buffer.pkl'))
+            if self.training:
+                self.replay_buffer.buffer = self.sm.load_replay_buffer(self.model.buffer_size, os.path.join(self.load_session, 'stage'+str(self.sm.stage)+'_latest_buffer.pkl'))
             self.total_steps = self.graph.set_graphdata(self.sm.load_graphdata(), self.episode)
             print(f"global steps: {self.total_steps}")
             print(f"loaded model {self.load_session} (eps {self.episode}): {self.model.get_model_parameters()}")
@@ -107,6 +106,7 @@ class DrlAgent(Node):
             self.gazebo_pause = self.create_client(Empty, '/pause_physics')
             self.gazebo_unpause = self.create_client(Empty, '/unpause_physics')
         self.process()
+
 
     def process(self):
         util.pause_simulation(self, self.real_robot)
@@ -152,7 +152,7 @@ class DrlAgent(Node):
                 if self.training == True:
                     self.replay_buffer.add_sample(state, action, [reward], next_state, [episode_done])
                     if self.replay_buffer.get_length() >= self.model.batch_size:
-                        loss_c, loss_a = self.model._train(self.replay_buffer)
+                        loss_c, loss_a, = self.model._train(self.replay_buffer)
                         loss_critic += loss_c
                         loss_actor += loss_a
 
@@ -170,27 +170,30 @@ class DrlAgent(Node):
             self.finish_episode(step, duration, outcome, distance_traveled, reward_sum, loss_critic, loss_actor)
 
     def finish_episode(self, step, eps_duration, outcome, dist_traveled, reward_sum, loss_critic, lost_actor):
-        if self.total_steps < self.observe_steps:
-            print(f"Observe phase: {self.total_steps}/{self.observe_steps} steps")
-            return
+            if self.total_steps < self.observe_steps:
+                print(f"Observe phase: {self.total_steps}/{self.observe_steps} steps")
+                return
 
-        self.episode += 1
-        print(f"Epi: {self.episode:<5}R: {reward_sum:<8.0f}outcome: {util.translate_outcome(outcome):<13}", end='')
-        print(f"steps: {step:<6}steps_total: {self.total_steps:<7}time: {eps_duration:<6.2f}")
+            self.episode += 1
+            print(f"Epi: {self.episode:<5}R: {reward_sum:<8.0f}outcome: {util.translate_outcome(outcome):<13}", end='')
+            print(f"steps: {step:<6}steps_total: {self.total_steps:<7}time: {eps_duration:<6.2f}")
 
-        if (not self.training):
-            self.logger.update_test_results(step, outcome, dist_traveled, eps_duration, 0)
-            return
+            if (not self.training):
+                self.logger.update_test_results(step, outcome, dist_traveled, eps_duration, 0)
+                return
 
-        self.graph.update_data(step, self.total_steps, outcome, reward_sum, loss_critic, lost_actor)
-        self.logger.file_log.write(f"{self.episode}, {reward_sum}, {outcome}, {eps_duration}, {step}, {self.total_steps}, \
-                                        {self.replay_buffer.get_length()}, {loss_critic / step}, {lost_actor / step}\n")
+            self.graph.update_data(step, self.total_steps, outcome, reward_sum, loss_critic, lost_actor)
+            self.logger.file_log.write(f"{self.episode}, {reward_sum}, {outcome}, {eps_duration}, {step}, {self.total_steps}, \
+                                            {self.replay_buffer.get_length()}, {loss_critic / step}, {lost_actor / step}\n")
 
-        if (self.episode % MODEL_STORE_INTERVAL == 0) or (self.episode == 1):
-            self.sm.save_session(self.episode, self.model.networks, self.graph.graphdata)
-            self.logger.update_comparison_file(self.episode, self.graph.get_success_count(), self.graph.get_reward_average())
-        if (self.episode % GRAPH_DRAW_INTERVAL == 0) or (self.episode == 1):
-            self.graph.draw_plots(self.episode)
+            if (self.episode % MODEL_STORE_INTERVAL == 0) or (self.episode == 1):
+                self.sm.save_session(self.episode, self.model.networks, self.graph.graphdata, self.replay_buffer.buffer)
+                self.logger.update_comparison_file(self.episode, self.graph.get_success_count(), self.graph.get_reward_average())
+            if (self.episode % GRAPH_DRAW_INTERVAL == 0) or (self.episode == 1):
+                self.graph.draw_plots(self.episode)
+
+
+
 
 def main(args=sys.argv[1:]):
     rclpy.init(args=args)

@@ -20,12 +20,12 @@ import math
 import numpy
 import sys
 import copy
-from numpy.core.numeric import Infinity
+#from numpy.core.numeric import Infinity
 
 from geometry_msgs.msg import Pose, Twist
 from rosgraph_msgs.msg import Clock
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import LaserScan, Image
 from turtlebot3_msgs.srv import DrlStep, Goal, RingGoal
 
 import rclpy
@@ -41,6 +41,7 @@ from ..common.settings import ENABLE_BACKWARD, EPISODE_TIMEOUT_SECONDS, ENABLE_M
 # Automatically retrievew from Gazebo model configuration (40 by default).
 # Can be set manually if needed.
 NUM_SCAN_SAMPLES = util.get_scan_count()
+print(f"NUM_SCAN_SAMPLES: {NUM_SCAN_SAMPLES}")
 LINEAR = 0
 ANGULAR = 1
 MAX_GOAL_DISTANCE = math.sqrt(ARENA_LENGTH**2 + ARENA_WIDTH**2)
@@ -66,11 +67,15 @@ class DRLEnvironment(Node):
 
         self.done = False
         self.succeed = UNKNOWN
-        self.episode_deadline = Infinity
+        #self.episode_deadline = Infinity
+        self.episode_deadline = numpy.inf
         self.reset_deadline = False
         self.clock_msgs_skipped = 0
 
-        self.obstacle_distances = [Infinity] * MAX_NUMBER_OBSTACLES
+        #self.obstacle_distances = [Infinity] * MAX_NUMBER_OBSTACLES
+        self.obstacle_distances = [numpy.inf] * MAX_NUMBER_OBSTACLES
+        self.depth1 = 0.0
+        self.depth2 = 0.0
 
         self.new_goal = False
         self.goal_angle = 0.0
@@ -97,6 +102,8 @@ class DRLEnvironment(Node):
         self.scan_sub = self.create_subscription(LaserScan, self.scan_topic, self.scan_callback, qos_profile=qos_profile_sensor_data)
         self.clock_sub = self.create_subscription(Clock, '/clock', self.clock_callback, qos_profile=qos_clock)
         self.obstacle_odom_sub = self.create_subscription(Odometry, 'obstacle/odom', self.obstacle_odom_callback, qos)
+        self.depth_sub1 = self.create_subscription(Image, '/depth_camera1/depth_camera1/depth/image_raw', self.depth_image_callback1, 10)
+        self.depth_sub2 = self.create_subscription(Image, '/depth_camera2/depth_camera2/depth/image_raw', self.depth_image_callback2, 10)
         # clients
         self.task_succeed_client = self.create_client(RingGoal, 'task_succeed')
         self.task_fail_client = self.create_client(RingGoal, 'task_fail')
@@ -180,10 +187,21 @@ class DRLEnvironment(Node):
         self.episode_deadline = self.time_sec + episode_time
         self.reset_deadline = False
         self.clock_msgs_skipped = 0
+    
+    def depth_image_callback1(self, msg):
+        self.depth1 = numpy.frombuffer(msg.data, dtype=numpy.float32)
+        #print("self.depth", self.depth, self.depth.size)
+        #print("self.depth", self.depth)
+
+    def depth_image_callback2(self, msg):
+        self.depth2 = numpy.frombuffer(msg.data, dtype=numpy.float32)
+        #print("self.depth", self.depth, self.depth.size)
+        #print("self.depth", self.depth)
 
     def stop_reset_robot(self, success):
         self.cmd_vel_pub.publish(Twist()) # stop robot
-        self.episode_deadline = Infinity
+        #self.episode_deadline = Infinity
+        self.episode_deadline = numpy.inf
         self.done = True
         req = RingGoal.Request()
         req.robot_pose_x = self.robot_x
@@ -201,11 +219,21 @@ class DRLEnvironment(Node):
             self.task_fail_client.call_async(req)
 
     def get_state(self, action_linear_previous, action_angular_previous):
-        state = copy.deepcopy(self.scan_ranges)                                             # range: [ 0, 1]
-        state.append(float(numpy.clip((self.goal_distance / MAX_GOAL_DISTANCE), 0, 1)))     # range: [ 0, 1]
-        state.append(float(self.goal_angle) / math.pi)                                      # range: [-1, 1]
-        state.append(float(action_linear_previous))                                         # range: [-1, 1]
-        state.append(float(action_angular_previous))                                        # range: [-1, 1]
+        #state = copy.deepcopy(self.scan_ranges)                                             # range: [ 0, 1]
+        state = copy.deepcopy(self.depth1)
+        #print("state1.shape", state.shape)
+        state = numpy.append(state, self.depth2)
+        #state = numpy.append(state, self.scan_ranges)                                             # range: [ 0, 1]
+        #print("state2.shape", state.shape)
+        #print("state.shape", state.shape)
+        state = numpy.append(state, float(numpy.clip((self.goal_distance / MAX_GOAL_DISTANCE), 0, 1)))     # range: [ 0, 1]
+        state = numpy.append(state, float(self.goal_angle) / math.pi)                                      # range: [-1, 1]
+        state = numpy.append(state, float(action_linear_previous))                                         # range: [-1, 1]
+        state = numpy.append(state, float(action_angular_previous))                                        # range: [-1, 1]
+        state = state.tolist()
+        #print('state', state, state.size())
+        #goal_distance = float(numpy.clip((self.goal_distance / MAX_GOAL_DISTANCE), 0, 1))
+        #goal_angle = float(self.goal_angle) / math.pi
         self.local_step += 1
 
         if self.local_step <= 30: # Grace period to wait for simulation reset
@@ -227,7 +255,8 @@ class DRLEnvironment(Node):
         elif self.time_sec >= self.episode_deadline:
             self.succeed = TIMEOUT
         # Tumble
-        elif self.robot_tilt > 0.06 or self.robot_tilt < -0.06:
+        #elif self.robot_tilt > 0.06 or self.robot_tilt < -0.06:
+        elif self.robot_tilt > 0.3 or self.robot_tilt < -0.3:
             self.succeed = TUMBLE
         if self.succeed is not UNKNOWN:
             self.stop_reset_robot(self.succeed == SUCCESS)
@@ -297,3 +326,4 @@ def main(args=sys.argv[1:]):
 
 if __name__ == '__main__':
     main()
+

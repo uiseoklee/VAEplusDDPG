@@ -1,0 +1,25 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from turtlebot3_msgs/srv/DrlStep.srv
+// generated code does not contain a copyright notice
+
+
+module turtlebot3_msgs {
+  module srv {
+    struct DrlStep_Request {
+      sequence<float> action;
+
+      sequence<float> previous_action;
+    };
+    struct DrlStep_Response {
+      sequence<float> state;
+
+      float reward;
+
+      boolean done;
+
+      uint32 success;
+
+      float distance_traveled;
+    };
+  };
+};
