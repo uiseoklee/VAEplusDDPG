@@ -40,6 +40,309 @@
       </visual>
     </link>
 
+
+
+    <link name="middle_base_link">
+
+      <inertial>
+        <pose>-0.064 0 0.205 0 0 0</pose>
+        <inertia>
+          <ixx>4.2111447e-02</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>4.2111447e-02</iyy>
+          <iyz>0</iyz>
+          <izz>7.5254874e-02</izz>
+        </inertia>
+        <mass>0.0729096e+00</mass>
+      </inertial>
+
+      <collision name="middle_base_collision">
+        <pose>-0.064 0 0.205 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.265 0.265 0.089</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="middle_base_visual">
+        <pose>-0.064 0 0.205 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://turtlebot3_waffle_pi/meshes/waffle_pi_base.dae</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+
+
+    <link name="top_base_link">
+
+      <inertial>
+        <pose>-0.064 0 0.705 0 0 0</pose>
+        <inertia>
+          <ixx>4.2111447e-02</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>4.2111447e-02</iyy>
+          <iyz>0</iyz>
+          <izz>7.5254874e-02</izz>
+        </inertia>
+        <mass>0.0729096e+00</mass>
+      </inertial>
+
+      <collision name="top_base_collision">
+        <pose>-0.064 0 0.705 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.265 0.265 0.089</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="top_base_visual">
+        <pose>-0.064 0 0.705 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://turtlebot3_waffle_pi/meshes/waffle_pi_base.dae</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    
+    
+
+
+    <!-- middle_pillar -->
+    
+    <link name="top_left_middle_pillar_link">
+      <inertial>
+        <pose>0.054 0.1 0.1718 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="top_left_middle_pillar_collision">
+        <pose>0.054 0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+    
+      <visual name="top_left_middle_pillar_visual">
+        <pose>0.054 0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="top_right_middle_pillar_link">
+      <inertial>
+        <pose>0.054 -0.1 0.1718 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="top_right_middle_pillar_collision">
+        <pose>0.054 -0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+    
+      <visual name="top_right_middle_pillar_visual">
+        <pose>0.054 -0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>      
+
+    <link name="bottom_left_middle_pillar_link">
+      <inertial>
+        <pose>-0.174 0.1 0.1718 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="bottom_left_middle_pillar_collision">
+        <pose>-0.174 0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+    
+      <visual name="bottom_left_middle_pillar_visual">
+        <pose>-0.174 0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    
+    <link name="bottom_right_middle_pillar_link">
+      <inertial>
+        <pose>-0.174 -0.1 0.1718 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="bottom_middle_right_pillar_collision">
+        <pose>-0.174 -0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+      <visual name="bottom_right_middle_pillar_visual">
+        <pose>-0.174 -0.1 0.1718 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>    
+
+
+
+
+    <!-- top pillar link-->
+
+
+    <link name="left_pillar_link">
+      <inertial>
+        <pose>-0.075 0.1 0.5218 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="left_pillar_collision">
+        <pose>-0.075 0.1 0.5218 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0208</radius>
+            <length>0.455</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+      <visual name="left_pillar_visual">
+        <pose>-0.075 0.1 0.5218 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0208</radius>
+            <length>0.455</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="right_pillar_link">
+      <inertial>
+        <pose>-0.075 -0.1 0.5218 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.014</mass>
+      </inertial>
+
+      <collision name="right_pillar_collision">
+        <pose>-0.075 -0.1 0.5218 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0208</radius>
+            <length>0.455</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    
+    
+      <visual name="right_pillar_visual">
+        <pose>-0.075 -0.1 0.5218 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0208</radius>
+            <length>0.455</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>      
+
+
+
+
+
     <link name="imu_link">
       <sensor name="tb3_imu" type="imu">
         <always_on>true</always_on>
@@ -349,11 +652,11 @@
       </collision>
     </link>
 
-    <link name="camera_link"/>
+    <link name="camera_link1"/>
 
-    <link name="camera_rgb_optical_frame">
+    <link name="camera_rgb_optical_frame1">
       <inertial>
-        <pose>0.076 0.0 0.093 0 0 0</pose>
+        <pose>0.036 0.0 0.755 0 0 -0.60</pose>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0.000</ixy>
@@ -365,16 +668,16 @@
         <mass>0.035</mass>
       </inertial>
 
-      <pose>0.076 0.0 0.093 0 0 0</pose>
-      <sensor name="camera" type="camera">
+      <pose>0.036 0.0 0.755 0 0 -0.60</pose>
+      <sensor name="camera1" type="camera">
         <always_on>true</always_on>
         <visualize>true</visualize>
-        <update_rate>30</update_rate>
+        <update_rate>10</update_rate>
         <camera name="picam">
           <horizontal_fov>1.085595</horizontal_fov>
           <image>
-              <width>640</width>
-              <height>480</height>
+              <width>160</width>
+              <height>80</height>
               <format>R8G8B8</format>
           </image>
           <clip>
@@ -395,19 +698,250 @@
               <!-- <namespace>test_cam</namespace> -->
               <!-- <remapping>image_raw:=image_demo</remapping> -->
               <!-- <remapping>camera_info:=camera_info_demo</remapping> -->
-            </ros>
-            <!-- camera_name>omit so it defaults to sensor name</camera_name-->
-            <!-- frame_name>omit so it defaults to link name</frameName-->
-            <!-- <hack_baseline>0.07</hack_baseline> -->
+              <!-- camera_name>omit so it defaults to sensor name</camera_name-->
+              <!-- frame_name>omit so it defaults to link name</frameName-->
+              <!-- <hack_baseline>0.07</hack_baseline> -->
+	      <namespace>camera1</namespace>
+	      <remapping>image_raw:=/rgb/image_raw</remapping>
+	      <remapping>camera_info:=/rgb/camera_info</remapping>
+	    </ros>
           </plugin>
       </sensor>
-    </link>    
+      
+      <!-- Depth Camera Sensor -->
+      <sensor name="depth_camera1" type="depth">
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <visualize>true</visualize>
+        <camera>
+          <horizontal_fov>1.085595</horizontal_fov>
+          <image>
+            <width>160</width>
+            <height>80</height>
+            <format>R8G8R8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise is sampled independently per pixel on each frame.
+                  That pixel's noise value is added to each of its color
+                  channels, which at that point lie in the range [0,1]. -->
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+          <save enabled="false">
+            <path>/home/dmsgv2/turtlebot3_drlnav/data/depth</path>
+          </save>
+        </camera>
+        <plugin name="camera_driver" filename="libgazebo_ros_camera.so">
+          <min_depth>0.0</min_depth>
+          <max_depth>255.0</max_depth>
+          <ros>
+            <namespace>depth_camera1</namespace>
+            <remapping>image_raw:=/depth/image_raw</remapping>
+            <remapping>camera_info:=/depth/camera_info</remapping>
+          </ros>
+        </plugin>
+      </sensor>
+    </link>  
+    
+
+    <link name="camera_link2"/>
+
+    <link name="camera_rgb_optical_frame2">
+      <inertial>
+        <pose>0.036 0.0 0.755 0 0 0.60</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.035</mass>
+      </inertial>
+
+      <pose>0.036 0.0 0.755 0 0 0.60</pose>
+      <sensor name="camera2" type="camera">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <camera name="picam">
+          <horizontal_fov>1.085595</horizontal_fov>
+          <image>
+              <width>160</width>
+              <height>80</height>
+              <format>R8G8B8</format>
+          </image>
+          <clip>
+              <near>0.03</near>
+              <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise is sampled independently per pixel on each frame.
+                  That pixel's noise value is added to each of its color
+                  channels, which at that point lie in the range [0,1]. -->
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+          <plugin name="camera_driver" filename="libgazebo_ros_camera.so">
+            <ros>
+              <!-- <namespace>test_cam</namespace> -->
+              <!-- <remapping>image_raw:=image_demo</remapping> -->
+              <!-- <remapping>camera_info:=camera_info_demo</remapping> -->
+              <!-- camera_name>omit so it defaults to sensor name</camera_name-->
+              <!-- frame_name>omit so it defaults to link name</frameName-->
+              <!-- <hack_baseline>0.07</hack_baseline> -->
+	      <namespace>camera2</namespace>
+	      <remapping>image_raw:=/rgb/image_raw</remapping>
+	      <remapping>camera_info:=/rgb/camera_info</remapping>
+	    </ros>
+          </plugin>
+      </sensor>
+      
+      <!-- Depth Camera Sensor -->
+      <sensor name="depth_camera2" type="depth">
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <visualize>true</visualize>
+        <camera>
+          <horizontal_fov>1.085595</horizontal_fov>
+          <image>
+            <width>160</width>
+            <height>80</height>
+            <format>R8G8R8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise is sampled independently per pixel on each frame.
+                  That pixel's noise value is added to each of its color
+                  channels, which at that point lie in the range [0,1]. -->
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+          <save enabled="false">
+            <path>/home/dmsgv2/turtlebot3_drlnav/data/depth</path>
+          </save>
+        </camera>
+        <plugin name="camera_driver" filename="libgazebo_ros_camera.so">
+          <min_depth>0.0</min_depth>
+          <max_depth>255.0</max_depth>
+          <ros>
+            <namespace>depth_camera2</namespace>
+            <remapping>image_raw:=/depth/image_raw</remapping>
+            <remapping>camera_info:=/depth/camera_info</remapping>
+          </ros>
+        </plugin>
+      </sensor>
+    </link>  
+    
 
     <joint name="base_joint" type="fixed">
       <parent>base_footprint</parent>
       <child>base_link</child>
       <pose>0.0 0.0 0.010 0 0 0</pose>
     </joint>
+
+
+    <!-- base_link - middle_pillar -->
+
+    
+    <joint name="top_left_middle_pillar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>top_left_middle_pillar_link</child>
+      <pose>0.054 0.1 0.1718 0 0 0</pose>
+    </joint>
+    
+    <joint name="top_right_middle_pillar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>top_right_middle_pillar_link</child>
+      <pose>0.054 -0.1 0.1718 0 0 0</pose>
+    </joint>
+    
+    <joint name="bottom_left_middle_pillar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>bottom_left_middle_pillar_link</child>
+      <pose>-0.174 0.1 0.1718 0 0 0</pose>
+    </joint>
+    
+    <joint name="bottom_right_middle_pillar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>bottom_right_middle_pillar_link</child>
+      <pose>-0.174 -0.1 0.1718 0 0 0</pose>
+    </joint>
+    
+    
+    
+    <!-- middle_pillar - middle_base -->    
+    
+    
+    <joint name="top_left_middle_base_joint" type="fixed">
+      <parent>top_left_middle_pillar_link</parent>
+      <child>middle_base_link</child>
+      <pose>0.054 0.1 0.305 0 0 0</pose>
+    </joint>
+
+    <joint name="top_right_middle_base_joint" type="fixed">          
+      <parent>top_right_middle_pillar_link</parent>
+      <child>middle_base_link</child>
+      <pose>0.054 -0.1 0.305 0 0 0</pose>
+    </joint>
+          
+    <joint name="bottom_left_middle_base_joint" type="fixed">          
+      <parent>bottom_left_middle_pillar_link</parent>
+      <child>middle_base_link</child>
+      <pose>-0.174 0.1 0.305 0 0 0</pose>
+    </joint>
+
+    <joint name="bottom_right_middle_base_joint" type="fixed">          
+      <parent>bottom_right_middle_pillar_link</parent>
+      <child>middle_base_link</child>
+      <pose>-0.174 -0.1 0.305 0 0 0</pose>
+    </joint>
+
+
+    <!-- middle_base - top_pillar -->
+
+    <joint name="top_left_pillar_joint" type="fixed">
+      <parent>middle_base_link</parent>
+      <child>left_pillar_link</child>
+      <pose>0.054 0.1 0.525 0 0 0</pose>
+    </joint>
+    
+    <joint name="top_right_pillar_joint" type="fixed">
+      <parent>middle_base_link</parent>
+      <child>right_pillar_link</child>
+      <pose>-0.054 -0.1 0.525 0 0 0</pose>
+    </joint>
+
+
+
+
+    <!-- top_pillar - top_base -->    
+    
+    
+    <joint name="left_top_base_joint" type="fixed">
+      <parent>left_pillar_link</parent>
+      <child>top_base_link</child>
+      <pose>0.054 0.1 0.705 0 0 0</pose>
+    </joint>
+
+    <joint name="right_top_base_joint" type="fixed">          
+      <parent>right_pillar_link</parent>
+      <child>top_base_link</child>
+      <pose>-0.054 -0.1 0.705 0 0 0</pose>
+    </joint>
+
 
     <joint name="wheel_left_joint" type="revolute">
       <parent>base_link</parent>
@@ -455,18 +989,36 @@
       </axis>
     </joint>
 
-    <joint name="camera_joint" type="fixed">
-      <parent>base_link</parent>
-      <child>camera_link</child>
+    <joint name="camera_joint1" type="fixed">
+      <parent>base_scan</parent>
+      <child>camera_link1</child>
       <pose>0.073 -0.011 0.084 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
       </axis>
     </joint>
 
-    <joint name="camera_rgb_joint" type="fixed">
-      <parent>camera_link</parent>
-      <child>camera_rgb_optical_frame</child>
+    <joint name="camera_rgb_joint1" type="fixed">
+      <parent>camera_link1</parent>
+      <child>camera_rgb_optical_frame1</child>
+      <pose>0.003 0.011 0.009 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    
+    <joint name="camera_joint2" type="fixed">
+      <parent>top_base_link</parent>
+      <child>camera_link2</child>
+      <pose>0.033 -0.011 0.4 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="camera_rgb_joint2" type="fixed">
+      <parent>camera_link2</parent>
+      <child>camera_rgb_optical_frame2</child>
       <pose>0.003 0.011 0.009 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>

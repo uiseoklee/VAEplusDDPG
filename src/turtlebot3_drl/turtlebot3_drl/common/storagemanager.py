@@ -44,7 +44,7 @@ class StorageManager:
         print(f"saving {network.name} model for episode: {episode}")
         torch.save(network.state_dict(), filepath)
 
-    def save_session(self, episode, networks, pickle_data):
+    def save_session(self, episode, networks, pickle_data, replay_buffer):
         print(f"saving data for episode: {episode}, location: {self.session_dir}")
         for network in networks:
             self.network_save_weights(network, self.session_dir, self.stage, episode)
@@ -52,6 +52,10 @@ class StorageManager:
         # Store graph data
         with open(os.path.join(self.session_dir, 'stage'+str(self.stage)+'_episode'+str(episode)+'.pkl'), 'wb') as f:
             pickle.dump(pickle_data, f, pickle.HIGHEST_PROTOCOL)
+
+        # Store latest buffer (can become very large, multiple gigabytes)
+        with open(os.path.join(self.session_dir, 'stage'+str(self.stage)+'_latest_buffer.pkl'), 'wb') as f:
+            pickle.dump(replay_buffer, f, pickle.HIGHEST_PROTOCOL)
 
         # Delete previous iterations (except every 1000th episode)
         if (episode % 1000 == 0):

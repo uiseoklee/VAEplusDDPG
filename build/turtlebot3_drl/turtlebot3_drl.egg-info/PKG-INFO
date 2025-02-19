@@ -1,0 +1,17 @@
+Metadata-Version: 1.2
+Name: turtlebot3-drl
+Version: 2.0.0
+Summary: DDPG for TurtleBot3.
+Home-page: UNKNOWN
+Author: ['Gilbert', 'Ryan Shim']
+Author-email: ['kkjong@robotis.com', 'jhshim@robotis.com']
+Maintainer: Pyo
+Maintainer-email: pyo@robotis.com
+License: Apache License, Version 2.0
+Description: UNKNOWN
+Keywords: ROS,ROS2,examples,rclpy
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development

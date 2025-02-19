@@ -225,7 +225,6 @@ class Actor(Network):
         plt.show()
         """
 
-
         li1_imaged = li1.view(li1.size(0), 1, 80, 160)
         li2_imaged = li2.view(li2.size(0), 1, 80, 160)
 
