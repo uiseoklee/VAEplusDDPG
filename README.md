@@ -10,6 +10,7 @@ cd ~/vaeplusddpg
 colcon build --symlink-install
 
 <If you have "dart" error during build, you should clone NAVIGATION/dart>
+<If you have error during build, you just need to run "source opt/ros/foxy/setup.bash">
 
 source install/setup.bash
 cd src/turtlebot3_simulations/turtlebot3_gazebo
@@ -23,14 +24,12 @@ ros2 run turtlebot3_drl environment
 cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
 ros2 run turtlebot3_drl train_agent ddpg
 
+<If you have error "ros2 run turtlebot3_drl train_agent ddpg, you just need to run that command again>
+
 # Terminal 4
 cd
 ros2 run turtlebot3_drl gazebo_goals
 
-If you have follow error, you should read "Issues" column.
 
-File "/home/dmsgv1/vaeplusddpg/build/turtlebot3_drl/turtlebot3_drl/common/replaybuffer.py", line 16, in sample
-    s_array = np.float32([array[0] for array in batch])
-ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (64,) + inhomogeneous part.
 
 
