@@ -17,19 +17,16 @@ cd src/turtlebot3_simulations/turtlebot3_gazebo
 ros2 launch turtlebot3_gazebo turtlebot3_drl_stage6.launch.py
 
 # Terminal 2
-cd
 ros2 run turtlebot3_drl environment
 
 # Terminal 3
 cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
 ros2 run turtlebot3_drl train_agent ddpg
 
-<If you have error "ros2 run turtlebot3_drl train_agent ddpg, you just need to run that command again>
-
 # Terminal 4
-cd
 ros2 run turtlebot3_drl gazebo_goals
 
+<If you have error in Terminal 3, you just need to run that command again>
 
 
 
