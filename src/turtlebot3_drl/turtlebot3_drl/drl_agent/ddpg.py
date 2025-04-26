@@ -192,7 +192,7 @@ class Actor(Network):
             li2 = states[depth_image_size:2 * depth_image_size].view(1, -1)
             s1 = states[-4:].view(1, -1)
 
-        darkness_factor = 0.3  # For 10% brightness
+        darkness_factor = 1.0  # For 10% brightness
 
 
         """
@@ -333,7 +333,7 @@ class Critic(Network):
 
 
 
-        darkness_factor = 0.3 # For 10% brightness
+        darkness_factor = 1.0 # For 10% brightness
 
         # Apply darkness_factor
         li1_imaged = li1_imaged * darkness_factor
