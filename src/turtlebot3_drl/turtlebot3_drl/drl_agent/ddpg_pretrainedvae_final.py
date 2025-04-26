@@ -358,7 +358,7 @@ class Actor(Network):
         #print("li1", li1, li1.min(), li1.max(), li1.shape, li1.dtype)
 
 
-        darkness_factor = 0.2  # For 10% brightness
+        darkness_factor = 1.0  # For 10% brightness
 
 
         """
@@ -522,7 +522,7 @@ class Critic(Network):
 
 
 
-        darkness_factor = 0.2  # For 10% brightness
+        darkness_factor = 1.0  # For 10% brightness
  
         # Apply darkness_factor
         li1_imaged = li1_imaged * darkness_factor
