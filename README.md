@@ -1,64 +1,64 @@
 # Robust Autonomous Navigation in Low-Light Environments using VAE+ and DDPG
 
-This repository contains the implementation for the research paper: **"Robust Autonomous Navigation in Low-Light Environments with Camera-Based VAE+ and Deep Reinforcement Learning"**[cite: 1].
+This repository contains the implementation for the research paper: **"Robust Autonomous Navigation in Low-Light Environments with Camera-Based VAE+ and Deep Reinforcement Learning"**.
 
-The project develops a control agent capable of robust autonomous driving and obstacle avoidance in various lighting conditions, particularly in dark environments where depth camera performance degrades[cite: 16, 19]. [cite\_start]The solution leverages a unique combination of a specialized Variational Autoencoder (VAE+) for perception and a Deep Deterministic Policy Gradient (DDPG) agent for control[cite: 1].
+The project develops a control agent capable of robust autonomous driving and obstacle avoidance in various lighting conditions, particularly in dark environments where depth camera performance degrades. The solution leverages a unique combination of a specialized Variational Autoencoder (VAE+) for perception and a Deep Deterministic Policy Gradient (DDPG) agent for control.
 
 ## 1\. Problem Statement
 
-Standard depth cameras struggle to recognize object distances and shapes in low-light (low illuminance) environments[cite: 19]. This poses a significant challenge for autonomous navigation systems that rely on visual input for safety and pathfinding. [cite\_start]This project aims to create a control model that can navigate reliably regardless of the ambient brightness[cite: 16].
+Standard depth cameras struggle to recognize object distances and shapes in low-light (low illuminance) environments. This poses a significant challenge for autonomous navigation systems that rely on visual input for safety and pathfinding. This project aims to create a control model that can navigate reliably regardless of the ambient brightness.
 
 ## 2\. Proposed Architecture
 
-Our approach is a two-stage process involving representation learning with a custom VAE and then policy learning with DDPG[cite: 36, 37].
+Our approach is a two-stage process involving representation learning with a custom VAE and then policy learning with DDPG.
 
 \<img src="[https://i.imgur.com/eE8W2dD.png](https://www.google.com/search?q=https://i.imgur.com/eE8W2dD.png)" width="800"/\>
-\> [cite\_start]*High-level overview: A pre-trained VAE+ Encoder provides latent state vectors to the DDPG agent, which then learns to navigate the environment. [cite: 21, 35, 36, 37]*
+\> *High-level overview: A pre-trained VAE+ Encoder provides latent state vectors to the DDPG agent, which then learns to navigate the environment.*
 
 ### Stage 1: VAE+ for Robust Feature Extraction
 
-To handle varying lighting conditions, we designed a **VAE+**, a modified Variational Autoencoder architecture. [cite\_start]Its primary role is to reconstruct a clean, bright depth image from a potentially dark and noisy input, and in doing so, learn a feature representation that is robust to changes in illuminance[cite: 381, 382].
+To handle varying lighting conditions, we designed a **VAE+**, a modified Variational Autoencoder architecture. Its primary role is to reconstruct a clean, bright depth image from a potentially dark and noisy input, and in doing so, learn a feature representation that is robust to changes in illuminance.
 
 The key modifications are in the **Encoder**:
 
-  * **CBAM (Convolutional Block Attention Module)**: We incorporated channel and spatial attention mechanisms to help the model focus on more salient features of the input image[cite: 59, 381].
-  * **FPN (Feature Pyramid Network)**: The encoder uses an FPN structure with a bottom-up and top-down pathway to create a rich hierarchy of features, enhancing its representational power[cite: 58, 110, 381].
+  * **CBAM (Convolutional Block Attention Module)**: We incorporated channel and spatial attention mechanisms to help the model focus on more salient features of the input image.
+  * **FPN (Feature Pyramid Network)**: The encoder uses an FPN structure with a bottom-up and top-down pathway to create a rich hierarchy of features, enhancing its representational power.
 
 \<img src="[https://i.imgur.com/gK96v7q.png](https://www.google.com/search?q=https://i.imgur.com/gK96v7q.png)" width="800"/\>
-\> [cite\_start]*Detailed architecture of the VAE+ Encoder, incorporating FPN and CBAM blocks. [cite: 57]*
+\> *Detailed architecture of the VAE+ Encoder, incorporating FPN and CBAM blocks.*
 
 ### Stage 2: DDPG for Navigation Control
 
-The navigation agent is based on the Deep Deterministic Policy Gradient (DDPG) algorithm, which is ideal for continuous action spaces (linear and angular velocity)[cite: 29].
+The navigation agent is based on the Deep Deterministic Policy Gradient (DDPG) algorithm, which is ideal for continuous action spaces (linear and angular velocity).
 
 The agent's neural networks receive a concatenated state vector composed of:
 
-1.  **Visual Features ($z\_1, z\_2$)**: Latent vectors generated by passing the input from two depth cameras through the pre-trained VAE+ encoder[cite: 125, 126, 127].
-2.  **Navigation Features**: The agent's own state from the previous timestep, including linear velocity ($v\_{t-1}$), angular velocity ($\\omega\_{t-1}$), and its relative position to the goal (distance $d\_{goal}$ and angle $\\theta\_{goal}$)[cite: 119, 120, 121, 122, 123].
+1.  **Visual Features ($z\_1, z\_2$)**: Latent vectors generated by passing the input from two depth cameras through the pre-trained VAE+ encoder.
+2.  **Navigation Features**: The agent's own state from the previous timestep, including linear velocity ($v\_{t-1}$), angular velocity ($\\omega\_{t-1}$), and its relative position to the goal (distance $d\_{goal}$ and angle $\\theta\_{goal}$).
 
 \<img src="[https://i.imgur.com/Yw1qTjL.png](https://www.google.com/search?q=https://i.imgur.com/Yw1qTjL.png)" width="600"/\>
-\> [cite\_start]*Architecture of the Actor and Critic networks within the DDPG agent. [cite: 118]*
+\> *Architecture of the Actor and Critic networks within the DDPG agent.*
 
 ## 3\. Experimental Setup
 
 ### Environment
 
   * **Simulator**: Gazebo [cite: 175]
-  * **World**: An 8x8 meter indoor space containing walls and desks[cite: 175].
-  * **Obstacles**: The environment includes desks with thin legs, which are designed to be difficult to detect by traditional 2D-LiDAR sensors, making camera-based avoidance essential[cite: 176].
-  * **Task**: The agent must navigate from a starting point to a randomly assigned goal location in each episode while avoiding all obstacles[cite: 177].
+  * **World**: An 8x8 meter indoor space containing walls and desks.
+  * **Obstacles**: The environment includes desks with thin legs, which are designed to be difficult to detect by traditional 2D-LiDAR sensors, making camera-based avoidance essential.
+  * **Task**: The agent must navigate from a starting point to a randomly assigned goal location in each episode while avoiding all obstacles.
 
 ### Agent
 
-  * **Base Model**: A customized TurtleBot3 Waffle-Pi, with its height extended to 0.75m[cite: 183].
-  * **Sensors**: Two depth cameras, each with a 120° field of view[cite: 182].
+  * **Base Model**: A customized TurtleBot3 Waffle-Pi, with its height extended to 0.75m.
+  * **Sensors**: Two depth cameras, each with a 120° field of view.
 
 ### Reward Function
 
 The agent is trained using a carefully designed reward function:
 
-  * **Major Rewards**: A large positive reward for reaching the goal (`+2500`) and a large negative penalty for collisions (`-2000`)[cite: 205, 227].
-  * **Shaping Penalties**: Smaller penalties are given to encourage efficient navigation, such as minimizing the angle to the goal, maintaining an optimal speed, and avoiding unnecessary rotations or proximity to obstacles [cite: 206-221].
+  * **Major Rewards**: A large positive reward for reaching the goal (`+2500`) and a large negative penalty for collisions (`-2000`).
+  * **Shaping Penalties**: Smaller penalties are given to encourage efficient navigation, such as minimizing the angle to the goal, maintaining an optimal speed, and avoiding unnecessary rotations or proximity to obstacles.
 
 ## 4\. Results
 
@@ -66,11 +66,11 @@ We conducted experiments to evaluate the agent's performance across a wide range
 
 ### Comparison of Training Methods
 
-1.  **Method 1 (DRL only, trained at 1.0 brightness)**: High success in bright light (96.4%), but fails completely as light decreases[cite: 244, 249, 253].
-2.  **Method 2 (DRL only, trained at 0.2 brightness)**: High success in low light (94-96%), but poor performance in bright light (25.4%)[cite: 262, 267, 279].
-3.  **Method 3 (Pre-trained VAE-frozen + DRL at 1.0 brightness)**: Achieves stable but mediocre performance (\~80-85% success) across all lighting conditions[cite: 287, 296, 306, 312].
-4.  **Method 4 (Pre-trained VAE-unfrozen + DRL at 1.0 brightness)**: Similar to Method 1, performs well in bright light but fails as it gets darker[cite: 313, 318, 326].
-5.  **Method 5 (Proposed, Pre-trained VAE-unfrozen + DRL at 0.2 brightness)**: This method demonstrated the most robust performance, achieving high success rates across a wide spectrum of low-light conditions (e.g., **96.6%** at 0.1 brightness) while also maintaining competence in brighter settings[cite: 334, 355].
+1.  **Method 1 (DRL only, trained at 1.0 brightness)**: High success in bright light (96.4%), but fails completely as light decreases.
+2.  **Method 2 (DRL only, trained at 0.2 brightness)**: High success in low light (94-96%), but poor performance in bright light (25.4%).
+3.  **Method 3 (Pre-trained VAE-frozen + DRL at 1.0 brightness)**: Achieves stable but mediocre performance (\~80-85% success) across all lighting conditions.
+4.  **Method 4 (Pre-trained VAE-unfrozen + DRL at 1.0 brightness)**: Similar to Method 1, performs well in bright light but fails as it gets darker.
+5.  **Method 5 (Proposed, Pre-trained VAE-unfrozen + DRL at 0.2 brightness)**: This method demonstrated the most robust performance, achieving high success rates across a wide spectrum of low-light conditions (e.g., **96.6%** at 0.1 brightness) while also maintaining competence in brighter settings.
 
 ### Performance of the Proposed Method (Method 5)
 
@@ -83,22 +83,22 @@ where other methods fail.
 ![Demo](media/only_DDPG_training_fail.gif)
 
 
-> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. [cite\_start]It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness. [cite: 334, 347, 349, 351, 353, 355]*
+> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. [cite\_start]It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness.*
 
 ### Generalization Test
 
-We also tested the best-performing models (Methods 4 and 5) in a new, unseen Gazebo environment. [cite\_start]**Method 5** (trained in low light) again showed superior and more stable performance across all lighting conditions compared to Method 4 (trained in bright light), confirming its better generalization capabilities[cite: 369, 372, 379].
+We also tested the best-performing models (Methods 4 and 5) in a new, unseen Gazebo environment. **Method 5** (trained in low light) again showed superior and more stable performance across all lighting conditions compared to Method 4 (trained in bright light), confirming its better generalization capabilities.
 
 ## 5\. Conclusion
 
-This research successfully demonstrates that an autonomous agent can achieve robust navigation in environments with varying and low-light conditions[cite: 383].
+This research successfully demonstrates that an autonomous agent can achieve robust navigation in environments with varying and low-light conditions.
 
 The key contributions are:
 
-1.  The **VAE+** architecture, which enhances a standard VAE encoder with CBAM and FPN, allowing it to learn features that are invariant to illuminance changes[cite: 381].
-2.  The finding that **simultaneously training the DRL agent and fine-tuning the VAE+ weights** in a low-light environment leads to the most robust and generalizable navigation policy[cite: 382].
+1.  The **VAE+** architecture, which enhances a standard VAE encoder with CBAM and FPN, allowing it to learn features that are invariant to illuminance changes.
+2.  The finding that **simultaneously training the DRL agent and fine-tuning the VAE+ weights** in a low-light environment leads to the most robust and generalizable navigation policy.
 
-The proposed model and training methodology present a significant step towards developing reliable obstacle avoidance systems that can be deployed in real-world scenarios with unpredictable lighting[cite: 383].
+The proposed model and training methodology present a significant step towards developing reliable obstacle avoidance systems that can be deployed in real-world scenarios with unpredictable lighting.
 
 ## 6\. How to Run
 
