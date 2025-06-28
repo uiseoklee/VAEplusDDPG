@@ -110,13 +110,13 @@ The proposed model and training methodology present a significant step towards d
 
 ### Terminal 1
 
-    ```bash
+    ```
     cd
     git clone https://github.com/uiseoklee/vaeplusddpg.git
     cd ~/vaeplusddpg
     colcon build --symlink-install
     ```
-If you have "dart" error during build, you should clone NAVIGATION/dart  
+If you have "dart" error during build, you should clone my **dart** repository  
 If you have error during build, you just need to run "source opt/ros/foxy/setup.bash"  
 
 ```
@@ -127,13 +127,13 @@ ros2 launch turtlebot3_gazebo turtlebot3_drl_stage6.launch.py
 
 ### Terminal 2
 
-    ```bash
+    ```
     ros2 run turtlebot3_drl environment
     ```
 
 ### Terminal 3
 
-    ```bash
+    ```
     cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
     ros2 run turtlebot3_drl train_agent ddpg
     ```
