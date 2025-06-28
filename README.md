@@ -74,9 +74,12 @@ We conducted experiments to evaluate the agent's performance across a wide range
 
 ### Performance of the Proposed Method (Method 5)
 
-The graph below shows the success rate of our final proposed model across different brightness levels. It maintains a high success rate even in very low-light conditions, where other methods fail.
-![Demo](media/only_DDPG_training_fail.gif)
+The graph below shows the success rate of our final proposed model across different brightness levels. It maintains a high success rate even in very low-light conditions, 
 ![Demo](media/VAEplusDDPG_training_success.gif)
+where other methods fail.
+
+![Demo](media/only_DDPG_training_fail.gif)
+
 
 > *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. [cite\_start]It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness. [cite: 334, 347, 349, 351, 353, 355]*
 
