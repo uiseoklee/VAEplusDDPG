@@ -138,7 +138,7 @@ cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
 ros2 run turtlebot3_drl train_agent ddpg
 ```
 
-<If you have pt files(pretrained model), you can run test as blow>
+If you have pt files(pretrained model), you can run test as blow  
 change: src/turtlebot3_drl/turtlebot3_drl/drl_agent/ddpg_pretrainedvae_final.py -> ddpg.py
 
 ```
@@ -149,7 +149,7 @@ ros2 run turtlebot3_drl test_agent ddpg 'ddpg_55_stage_6' 3600
 ```
 ros2 run turtlebot3_drl gazebo_goals
 ```
-<If you have error in Terminal 3, you just need to run that command again>
+If you have error in Terminal 3, you just need to run that command again
 
 
 
