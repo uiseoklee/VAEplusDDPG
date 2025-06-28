@@ -88,6 +88,7 @@ where other methods fail.
 ### Generalization Test
 
 We also tested the best-performing models (Methods 4 and 5) in a new, unseen Gazebo environment. **Method 5** (trained in low light) again showed superior and more stable performance across all lighting conditions compared to Method 4 (trained in bright light), confirming its better generalization capabilities.
+![generalization](media/generalization_test.png)
 
 ## 5\. Conclusion
 
