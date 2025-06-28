@@ -12,7 +12,7 @@ Standard depth cameras struggle to recognize object distances and shapes in low-
 
 Our approach is a two-stage process involving representation learning with a custom VAE and then policy learning with DDPG.
 
-\<img src="[https://i.imgur.com/eE8W2dD.png](https://www.google.com/search?q=https://i.imgur.com/eE8W2dD.png)" width="800"/\>
+\> ![overview](media/high-level overview.png)
 \> *High-level overview: A pre-trained VAE+ Encoder provides latent state vectors to the DDPG agent, which then learns to navigate the environment.*
 
 ### Stage 1: VAE+ for Robust Feature Extraction
@@ -83,7 +83,7 @@ where other methods fail.
 ![Demo](media/only_DDPG_training_fail.gif)
 
 
-> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. [cite\_start]It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness.*
+> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness.*
 
 ### Generalization Test
 
