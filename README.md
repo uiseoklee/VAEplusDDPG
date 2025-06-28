@@ -13,7 +13,7 @@ Standard depth cameras struggle to recognize object distances and shapes in low-
 Our approach is a two-stage process involving representation learning with a custom VAE and then policy learning with DDPG.
 
 ![overview](media/high-level overview.png)
-\> *High-level overview: A pre-trained VAE+ Encoder provides latent state vectors to the DDPG agent, which then learns to navigate the environment.*
+*High-level overview: A pre-trained VAE+ Encoder provides latent state vectors to the DDPG agent, which then learns to navigate the environment.*
 
 ### Stage 1: VAE+ for Robust Feature Extraction
 
