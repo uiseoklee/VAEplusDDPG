@@ -87,7 +87,7 @@ where other methods fail.
 ### Generalization Test
 
 We also tested the best-performing models (Methods 4 and 5) in a new, unseen Gazebo environment. **Method 5** (trained in low light) again showed superior and more stable performance across all lighting conditions compared to Method 4 (trained in bright light), confirming its better generalization capabilities.  
-<img src="media/generalization_test.png" style="width:50%;"/>
+<img src="media/generalization_test.png" style="width:40%;"/>
 
 ## 5\. Conclusion
 
@@ -139,7 +139,7 @@ ros2 launch turtlebot3_gazebo turtlebot3_drl_stage6.launch.py
     ```
 
 <If you have pt files(pretrained model), you can run test as blow>
-# change: src/turtlebot3_drl/turtlebot3_drl/drl_agent/ddpg_pretrainedvae_final.py -> ddpg.py
+change: src/turtlebot3_drl/turtlebot3_drl/drl_agent/ddpg_pretrainedvae_final.py -> ddpg.py
 
 ```
 ros2 run turtlebot3_drl test_agent ddpg 'ddpg_55_stage_6' 3600
