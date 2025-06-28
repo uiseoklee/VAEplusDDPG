@@ -75,19 +75,19 @@ We conducted experiments to evaluate the agent's performance across a wide range
 ### Performance of the Proposed Method (Method 5)
 
 The graph below shows the success rate of our final proposed model across different brightness levels. It maintains a high success rate even in very low-light conditions, 
-![Comparison graph by method](media/graphs_methods.png)
-<img src="media/VAEplusDDPG_training_success.gif" width="400"/>
+![Comparison graph by method](media/graphs_methods.png)  
+<img src="media/VAEplusDDPG_training_success.gif" width="400"/>  
 
-where other methods fail.
-<img src="media/only_DDPG_training_fail.gif" width="400"/>
+where other methods fail.  
+<img src="media/only_DDPG_training_fail.gif" width="400"/>  
 
 
-> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness.*
+> *Success rate of Method 5. The agent was trained at 0.2 brightness with the VAE+ weights being updated during DRL training. It shows excellent performance in low-light environments from 0.3 down to 0.1 brightness.*  
 
 ### Generalization Test
 
 We also tested the best-performing models (Methods 4 and 5) in a new, unseen Gazebo environment. **Method 5** (trained in low light) again showed superior and more stable performance across all lighting conditions compared to Method 4 (trained in bright light), confirming its better generalization capabilities.  
-<img src="media/generalization_test.png" style="width:25%;"/>
+<img src="media/generalization_test.png" style="width:50%;"/>
 
 ## 5\. Conclusion
 
@@ -104,75 +104,51 @@ The proposed model and training methodology present a significant step towards d
 
 ### Prerequisites
 
-  - Python 3.7+
-  - Pip
-  - Appropriate simulation environment (Gazebo, ROS)
+  - Ubuntu 20.04
+  - ROS2 foxy
+  - Turtlebot3 packages (refer to turtlebot3 emanual)
 
-### Installation
-
-1.  **Clone the repository:**
+### Terminal 1
 
     ```bash
-    git clone https://github.com/uiseoklee/VAEplusDDPG.git
-    cd VAEplusDDPG
+    cd
+    git clone https://github.com/uiseoklee/vaeplusddpg.git
+    cd ~/vaeplusddpg
+    colcon build --symlink-install
     ```
+If you have "dart" error during build, you should clone NAVIGATION/dart  
+If you have error during build, you just need to run "source opt/ros/foxy/setup.bash"  
 
-2.  **Install the required dependencies:**
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-### Training
-
-1.  **Step 1: Pre-train the VAE+**
-    This script trains the VAE+ model to reconstruct bright images from various inputs. The resulting model (`vae.pth`) will be saved in the `saves/` directory.
-
-    ```bash
-    python vae_train.py
-    ```
-
-2.  **Step 2: Train the DDPG Agent**
-    This script loads the pre-trained VAE+ encoder and begins training the DDPG agent for the navigation task. Model checkpoints will be saved periodically in the `saves/` directory.
-
-    ```bash
-    python ddpg_train.py
-    ```
-
-
-```bash
-# Prerequisite
-Ubuntu 20.04
-ROS2 foxy
-Turtlebot3 packages (refer to turtlebot3 emanual)
-
-# Terminal 1
-cd
-git clone https://github.com/uiseoklee/vaeplusddpg.git
-cd ~/vaeplusddpg
-colcon build --symlink-install
-
-<If you have "dart" error during build, you should clone NAVIGATION/dart>
-<If you have error during build, you just need to run "source opt/ros/foxy/setup.bash">
-
+```
 source install/setup.bash
 cd src/turtlebot3_simulations/turtlebot3_gazebo
 ros2 launch turtlebot3_gazebo turtlebot3_drl_stage6.launch.py
+```
 
-# Terminal 2
-ros2 run turtlebot3_drl environment
+### Terminal 2
 
-# Terminal 3
-cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
-ros2 run turtlebot3_drl train_agent ddpg
+    ```bash
+    ros2 run turtlebot3_drl environment
+    ```
+
+### Terminal 3
+
+    ```bash
+    cd ~/vaeplusddpg/src/turtlebot3_drl/turtlebot3_drl/drl_agent
+    ros2 run turtlebot3_drl train_agent ddpg
+    ```
 
 <If you have pt files(pretrained model), you can run test as blow>
 # change: src/turtlebot3_drl/turtlebot3_drl/drl_agent/ddpg_pretrainedvae_final.py -> ddpg.py
+
+```
 ros2 run turtlebot3_drl test_agent ddpg 'ddpg_55_stage_6' 3600
+```
 
-# Terminal 4
+### Terminal 4
+```
 ros2 run turtlebot3_drl gazebo_goals
-
+```
 <If you have error in Terminal 3, you just need to run that command again>
 
 
