@@ -1,4 +1,4 @@
-# Robust Autonomous Navigation in Low-Light Environments using VAE+ and DDPG
+# Robust Autonomous Navigation in Low-Light Environments using VAE+DDPG
 
 This repository contains the implementation for the research paper: **"Robust Autonomous Navigation in Low-Light Environments with Camera-Based VAE+ and Deep Reinforcement Learning"**.
 
