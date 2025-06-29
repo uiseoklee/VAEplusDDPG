@@ -74,11 +74,12 @@ We conducted experiments to evaluate the agent's performance across a wide range
 
 ### Performance of the Proposed Method (Method 5)
 
-The graph below shows the success rate of our final proposed model across different brightness levels. It maintains a high success rate even in very low-light conditions, 
-![Comparison graph by method](media/graphs_methods_f.png)  
-<img src="media/VAEplusDDPG_training_success.gif" width="400"/>  
+The graph below shows the success rate of our final proposed model across different brightness levels. It maintains a high success rate even in very low-light conditions,  
   
-where other methods fail.  
+![Comparison graph by method](media/graphs_methods_f.png)<br>
+<img src="media/VAEplusDDPG_training_success.gif" width="400"/><br>
+  
+where other methods fail.<br>
 <img src="media/only_DDPG_training_fail.gif" width="400"/>  
 
 
